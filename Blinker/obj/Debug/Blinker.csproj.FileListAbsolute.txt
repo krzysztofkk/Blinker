@@ -1,0 +1,6 @@
+c:\users\yeenz\documents\visual studio 2015\Projects\Blinker\Blinker\bin\Debug\Blinker.exe.config
+c:\users\yeenz\documents\visual studio 2015\Projects\Blinker\Blinker\bin\Debug\Blinker.exe
+c:\users\yeenz\documents\visual studio 2015\Projects\Blinker\Blinker\bin\Debug\Blinker.pdb
+c:\users\yeenz\documents\visual studio 2015\Projects\Blinker\Blinker\obj\Debug\Blinker.csprojResolveAssemblyReference.cache
+c:\users\yeenz\documents\visual studio 2015\Projects\Blinker\Blinker\obj\Debug\Blinker.exe
+c:\users\yeenz\documents\visual studio 2015\Projects\Blinker\Blinker\obj\Debug\Blinker.pdb
