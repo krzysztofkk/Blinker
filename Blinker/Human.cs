@@ -3,11 +3,18 @@
 	public class Human : Creature
 	{
 		private int _health;
+		private string _greeting;
 
-
-		public Human(int id, string name, Location location, int health) : base(id, name, location)
+		public Human(int id, string name, Location location) : base(id, name, location)
 		{
-			_health = health;
+			_health = 100;
+			_greeting = " ... ";
+		}
+
+		public Human(int id, string name, string greeting, Location location) : base(id, name, location)
+		{
+			_health = 100;
+			_greeting = greeting;
 		}
 
 		public bool IsAlive()
@@ -17,7 +24,7 @@
 
 		public override void Greet()
 		{
-			Writer.WriteDialog(string.Format("[{0}]: My name is {1}\n", Name, Name));
+			Writer.WriteDialog(string.Format("[{0}]: {1}\n", Name, _greeting));
 		}
 	}
 }
