@@ -3,12 +3,20 @@
 	public abstract class Creature
 	{
 		private int _id;
+		private string _name;
 		private Location _currentLocation;
 
-		protected Creature(int id, Location location)
+		protected Creature(int id, string name, Location location)
 		{
 			_id = id;
+			_name = name;
 			_currentLocation = location;
+		}
+
+		public string Name
+		{
+			get { return _name; }
+			private set { _name = value; }
 		}
 
 		public Location CurrentLocation
