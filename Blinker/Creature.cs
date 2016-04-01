@@ -2,22 +2,18 @@
 {
 	public abstract class Creature
 	{
-		private int _id;
-		private string _name;
 		private Location _currentLocation;
 
-		protected Creature(int id, string name, Location location)
+		protected Creature(string name, Location location)
 		{
-			_id = id;
-			_name = name;
+			Name = name;
+			Health = 100;
 			_currentLocation = location;
 		}
 
-		public string Name
-		{
-			get { return _name; }
-			private set { _name = value; }
-		}
+		public string Name { get; private set; }
+
+		public int Health { get; private set; }
 
 		public Location CurrentLocation
 		{
@@ -30,6 +26,9 @@
 			}
 		}
 
-		public abstract void Greet();
+		public bool IsAlive()
+		{
+			return (Health > 0);
+		}
 	}
 }
