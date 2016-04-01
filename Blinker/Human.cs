@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blinker
+﻿namespace Blinker
 {
 	public class Human : Creature
 	{
