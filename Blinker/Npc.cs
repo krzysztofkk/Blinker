@@ -9,11 +9,13 @@ namespace Blinker
 		public Npc(string name, Location location) : base(name, location)
 		{
 			_greeting = " ... ";
+			Move(location);
 		}
 
 		public Npc(string name, string greeting, Location location) : base(name, location)
 		{
 			_greeting = greeting;
+			Move(location);
 		}
 
 		public void Greet()
