@@ -14,7 +14,7 @@ namespace Blinker
 		}
 
 		public List<Location> Exits = new List<Location>();
-		public List<Creature> Creatures = new List<Creature>();
+		public List<Npc> NpcList = new List<Npc>();
 
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -22,17 +22,17 @@ namespace Blinker
 		//gonna move that method to Player class soon
 		public void CheckLocation()
 		{
-			 Writer.WriteInfo(string.Format("I am in the [{0}].\nIt's a {1}\n\n", Name, Description));
+			 Writer.WriteInfo(string.Format("I am in the [{0}].\nIt's a {1}.\n\n", Name, Description));
 		}
 
 		//this one too
 		public void WhoIsThere()
 		{
-			if (Creatures.Any())
+			if (NpcList.Any())
 			{
 				Writer.WriteInfo("You see ");
-				foreach (Creature c in Creatures)
-					Writer.WriteDialog("["+c.Name+"]"+", ");
+				foreach (Npc n in NpcList)
+					Writer.WriteDialog("["+n.Name+"]"+", ");
 				Writer.WriteInfo("there.\n\n");
 			}
 			else

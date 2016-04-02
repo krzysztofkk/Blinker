@@ -1,6 +1,6 @@
 ﻿namespace Blinker
 {
-	public class Npc : Creature
+	public class Npc : Creature, IMover
 	{
 		private readonly string _greeting;
 
@@ -16,7 +16,14 @@
 
 		public void Greet()
 		{
-			Writer.WriteDialog(string.Format("[{0}]: {1}\n", Name, _greeting));
+			Writer.WriteDialog(string.Format("[{0}]: {1}\n\n", Name, _greeting));
+		}
+
+		public void Move(Location targetLocation)
+		{
+			CurrentLocation.NpcList.Remove(this);
+			CurrentLocation = targetLocation;
+			CurrentLocation.NpcList.Add(this);
 		}
 	}
 }
