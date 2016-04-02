@@ -34,7 +34,6 @@ namespace Blinker
 			Console.ForegroundColor = color;
 			Console.Write(content);
 			Console.ResetColor();
-
 		}
 	}
 }

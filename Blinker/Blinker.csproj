@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Creature.cs" />
     <Compile Include="IMoveable.cs" />
     <Compile Include="IPickupable.cs" />
