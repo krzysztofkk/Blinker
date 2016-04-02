@@ -14,6 +14,11 @@ namespace Blinker
 			Write(content, ConsoleColor.Yellow);
 		}
 
+		public static void WriteItem(string content)
+		{
+			Write(content, ConsoleColor.Cyan);
+		}
+
 		public static void WriteInfo(string content)
 		{
 			Write(content, ConsoleColor.White);
