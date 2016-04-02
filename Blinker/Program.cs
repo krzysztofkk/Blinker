@@ -23,7 +23,6 @@ namespace Blinker
 			room.NpcList.Remove(dave);
 			anotherRoom.NpcList.Add(dave);
 
-			room.WhoIsThere();
 
 			Console.ReadKey();
 		}

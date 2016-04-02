@@ -14,7 +14,13 @@ namespace Blinker
 		}
 
 		public List<Location> Exits = new List<Location>();
-		public List<Npc> NpcList = new List<Npc>();
+		private List<Npc> _npcList = new List<Npc>();
+
+		public List<Npc> NpcList
+		{
+			get { return _npcList; }
+			set { _npcList = value; }
+		}
 
 		public string Name { get; set; }
 		public string Description { get; set; }
