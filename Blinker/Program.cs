@@ -52,6 +52,8 @@ namespace Blinker
 
 			player.Move(room);
 
+			john.ReceiveDamage(30);
+
 
 			Console.ReadKey();
 		}
