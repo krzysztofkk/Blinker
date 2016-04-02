@@ -20,7 +20,7 @@ namespace Blinker
 
 		public void Greet()
 		{
-			Writer.WriteDialog(string.Format("[{0}]: {1}\n\n", Name, _greeting));
+			Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, _greeting));
 		}
 
 		public void Move(Location targetLocation)

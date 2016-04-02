@@ -14,9 +14,9 @@ namespace Blinker
 			Writer.WriteAction("Text");
 			Writer.WriteInfo(" - commited action (i.e picked up item, moved to another location\n");
 			Writer.WriteDialog("Text");
-			Writer.WriteInfo(" - a non player character\n");
+			Writer.WriteInfo(" - a dialog/npc\n");
 			Writer.WriteLocation("Text");
-			Writer.WriteInfo(" - a location (where you can possibly go)");
+			Writer.WriteInfo(" - a location (where you can possibly go)\n");
 			Writer.WriteItem("Text");
 			Writer.WriteInfo(" - an item (might be pickupable)\n");
 			Writer.WriteLog("# END INFO\n\n");

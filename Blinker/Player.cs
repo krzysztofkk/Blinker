@@ -15,14 +15,16 @@ namespace Blinker
 		public void CheckLocationInfo()
 		{
 			Writer.WriteAction("> You are checking where you are.\n");
-			Writer.WriteInfo(string.Format("I am in the [{0}].\nIt's a {1}.\n\n", CurrentLocation.Name, CurrentLocation.Description));
+			Writer.WriteInfo("I am in the ");
+			Writer.WriteLocation(string.Format("{0}\n", CurrentLocation.Name));
+			Writer.WriteInfo(string.Format("It's a {0}.\n\n", CurrentLocation.Description));
 		}
 
 		public void CheckLocationExits()
 		{
 			Writer.WriteAction("> You are checking where you can go from here.\n");
 			foreach(var exit in CurrentLocation.Exits)
-				Writer.WriteInfo("["+exit.Name+"], ");
+				Writer.WriteLocation(exit.Name+", ");
 			Writer.WriteInfo("\n\n");
 		}
 
@@ -33,7 +35,7 @@ namespace Blinker
 			{
 				Writer.WriteInfo("You see ");
 				foreach (var npc in CurrentLocation.NpcList)
-					Writer.WriteDialog("[" + npc.Name + "]" + ", ");
+					Writer.WriteDialog(npc.Name+", ");
 				Writer.WriteInfo("there.\n\n");
 			}
 			else
@@ -49,7 +51,7 @@ namespace Blinker
 			{
 				Writer.WriteInfo("You see ");
 				foreach (var i in CurrentLocation.PickupableItemList)
-					Writer.WriteItem("[" + i.Name + "]" + ", ");
+					Writer.WriteItem(i.Name+ ", ");
 				Writer.WriteInfo("there.\n\n");
 			}
 			else
@@ -62,7 +64,7 @@ namespace Blinker
 		{
 			Writer.WriteAction("> You are checking your inventory. Available items:\n");
 			foreach (var item in Items)
-				Writer.WriteItem("["+item.Name+"], ");
+				Writer.WriteItem(item.Name+", ");
 			Writer.WriteAction("\n\n");
 		}
 
@@ -72,12 +74,15 @@ namespace Blinker
 			{
 				if (CurrentLocation.Exits.Contains(targetLocation))
 				{
-					Writer.WriteAction(string.Format("> You are moving from {0} to {1}.\n\n", CurrentLocation.Name, targetLocation.Name));
+					Writer.WriteAction("> You are moving from ");
+					Writer.WriteLocation(string.Format("{0}", CurrentLocation.Name));
+					Writer.WriteAction(" to ");
+					Writer.WriteLocation(string.Format("{0}\n\n", targetLocation.Name));
 					CurrentLocation = targetLocation;
 				}
 				else
 				{
-					Writer.WriteAction(string.Format("> You cannot go to {0} from {1}.\n\n", targetLocation.Name, CurrentLocation.Name));
+					Writer.WriteAction("> You cannot go there.\n\n");
 				}
 			}
 			else
@@ -115,7 +120,7 @@ namespace Blinker
 		public void PickUpItem(PickupableItem item)
 		{
 			Writer.WriteAction("> You picked up ");
-			Writer.WriteItem(string.Format("[{0}]\n\n", item.Name));
+			Writer.WriteItem(string.Format("{0}\n\n", item.Name));
 			CurrentLocation.PickupableItemList.Remove(item);
 			Items.Add(item);
 		}
@@ -123,7 +128,7 @@ namespace Blinker
 		public void ThrowOutItem(PickupableItem item)
 		{
 			Writer.WriteAction("> You threw out ");
-			Writer.WriteItem(string.Format("[{0}]\n\n", item.Name));
+			Writer.WriteItem(string.Format("{0}\n\n", item.Name));
 			Items.Remove(item);
 			CurrentLocation.PickupableItemList.Add(item);
 		}
