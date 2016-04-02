@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Blinker
 {
 	public abstract class Creature
 	{
+		static Random _random = new Random();
 		protected Creature(string name, Location location)
 		{
 			Name = name;
@@ -28,10 +30,10 @@ namespace Blinker
 		{
 			if (IsAlive())
 			{
-				Health += amount;
-				//gonna move it to player.AttackTarget(target) method
+				Health -= amount;
+				//gonna move it to AttackTarget(target) method
 				//Writer.WriteActionHostile(string.Format("Target receives {0} damage.\n", amount));
-				var reaction = ReactionList.PickRandom();
+				var reaction = (string) ReactionList[_random.Next(ReactionList.Count)];
 				Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, reaction));
 			}
 

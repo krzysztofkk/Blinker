@@ -10,11 +10,15 @@ namespace Blinker
 		{
 			_greeting = " ... ";
 			location.NpcList.Add(this);
+			ReactionList.Clear();
+			ReactionList.Add("Argh!");
 		}
 
 		public Npc(string name, string greeting, Location location) : base(name, location)
 		{
 			_greeting = greeting;
+			ReactionList.Clear();
+			ReactionList.Add("Argh!");
 			Move(location);
 		}
 

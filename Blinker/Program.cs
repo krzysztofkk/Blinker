@@ -21,7 +21,10 @@ namespace Blinker
 			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
 
 			var john = new Npc("John", "I'm busy right now.", room);
+			john.ReactionList.AddMany("What the hell?", "Stop it!");
 			var dave = new Npc("Dave", "Hello! What do you need?", room);
+			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!");
+
 
 			player.CheckMyItems();
 
@@ -53,6 +56,14 @@ namespace Blinker
 			player.Move(room);
 
 			john.ReceiveDamage(30);
+			john.ReceiveDamage(30);
+			john.ReceiveDamage(30);
+			john.ReceiveDamage(30);
+			john.ReceiveDamage(30);
+			john.ReceiveDamage(30);
+			dave.ReceiveDamage(10);
+			dave.ReceiveDamage(10);
+
 
 
 			Console.ReadKey();
