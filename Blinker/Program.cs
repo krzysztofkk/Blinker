@@ -19,6 +19,9 @@ namespace Blinker
 			var item3 = new PickupableItem("stone", "tiny, gray stone", room);
 			var item4 = new PickupableItem("empty bottle", "empty irish beer bottle", room);
 			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
+			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", player, 25);
+
+			player.EquipedWeapon = wpn1;
 
 			var john = new Npc("John", "I'm busy right now.", room);
 			john.ReactionList.AddMany("What the hell?", "Stop it!");
@@ -55,11 +58,11 @@ namespace Blinker
 
 			player.Move(room);
 
-			player.Attack(john, 50);
-			player.Attack(john, 50);
-			player.Attack(john, 50);
+			player.Attack(john);
+			player.Attack(john);
+			player.Attack(john);
 
-			player.Attack(dave, 50);
+			player.Attack(dave);
 
 
 

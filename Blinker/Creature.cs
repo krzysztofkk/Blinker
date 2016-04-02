@@ -11,15 +11,22 @@ namespace Blinker
 			Name = name;
 			Health = 100;
 			CurrentLocation = location;
+			Strength = 10;
 		}
 
 		public string Name { get; private set; }
 
 		public int Health { get; protected set; }
 
+		public int Strength { get; private set; }
+
 		public Location CurrentLocation { get; protected set; }
 
 		public List<string> ReactionList { get; set; } = new List<string> {"..."};
+
+		public List<PickupableItem> Items { get; set; } = new List<PickupableItem>(); 
+
+		public Weapon EquipedWeapon { get; set; }
 
 		public bool IsAlive()
 		{
@@ -49,8 +56,16 @@ namespace Blinker
 			}
 		}
 
-		protected void AttackTarget(Creature target, int amount)
+		protected int CalculateHit()
 		{
+			if (EquipedWeapon != null)
+				return Strength + EquipedWeapon.AttackValue;
+			return Strength;
+		}
+
+		protected void AttackTarget(Creature target)
+		{
+			var amount = CalculateHit();
 			if (IsAlive())
 			{
 				Writer.WriteActionHostile("Target ");

@@ -7,10 +7,7 @@ namespace Blinker
 	{
 		public Player(string name, Location location) : base(name, location)
 		{
-			Items = new List<PickupableItem>();
 		}
-
-		public List<PickupableItem> Items { get; set; }
 
 		public void CheckLocationInfo()
 		{
@@ -133,10 +130,10 @@ namespace Blinker
 			CurrentLocation.PickupableItemList.Add(item);
 		}
 
-		public void Attack(Creature target, int amount)
+		public void Attack(Creature target)
 		{
 			Writer.WriteAction("> You are trying to attack the target.\n");
-			AttackTarget(target, amount);
+			AttackTarget(target);
 		}
 	}
 }
