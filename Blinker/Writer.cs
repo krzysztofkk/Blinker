@@ -6,30 +6,30 @@ namespace Blinker
 	{
 		public static void WriteDialog(string content)
 		{
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.Write(content);
-			Console.ResetColor();
+			Write(content, ConsoleColor.Green);
 		}
 
 		public static void WriteAction(string content)
 		{
-			Console.ForegroundColor = ConsoleColor.Yellow;
-			Console.Write(content);
-			Console.ResetColor();
+			Write(content, ConsoleColor.Yellow);
 		}
 
 		public static void WriteInfo(string content)
 		{
-			Console.ForegroundColor = ConsoleColor.White;
-			Console.Write(content);
-			Console.ResetColor();
+			Write(content, ConsoleColor.White);
 		}
 
 		public static void WriteLog(string content)
 		{
-			Console.ForegroundColor = ConsoleColor.Blue;
-			Console.WriteLine("*"+content+"*");
+			Write(content, ConsoleColor.Blue);
+		}
+
+		public static void Write(string content, ConsoleColor color)
+		{
+			Console.ForegroundColor = color;
+			Console.Write(content);
 			Console.ResetColor();
+
 		}
 	}
 }
