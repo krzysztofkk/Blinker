@@ -88,8 +88,28 @@ namespace Blinker
 
 		public void TalkTo(Npc someone)
 		{
-			Writer.WriteAction(string.Format("> You talk to {0}.\n", someone.Name));
-			someone.Greet();
+			if (CurrentLocation.NpcList.Contains(someone))
+			{
+				if (someone.IsAlive())
+				{
+					Writer.WriteAction(string.Format("> You talk to {0}.\n", someone.Name));
+					someone.Greet();
+				}
+				else
+				{
+					Writer.WriteAction("> Cannot talk. ");
+					Writer.WriteDialog(string.Format("{0}", someone.Name));
+					Writer.WriteAction(" is dead.\n\n");
+				}
+			}
+			else
+			{
+				Writer.WriteAction("> Cannot talk. ");
+				Writer.WriteDialog(string.Format("{0}", someone.Name));
+				Writer.WriteAction(" is not in ");
+				Writer.WriteInfo(string.Format("{0}\n\n", CurrentLocation.Name));
+
+			}
 		}
 
 		public void PickUpItem(PickupableItem item)

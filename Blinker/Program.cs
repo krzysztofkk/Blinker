@@ -28,6 +28,7 @@ namespace Blinker
 			player.CheckLocationInfo();
 			player.CheckLocationExits();
 			player.CheckWhoIsThere();
+			player.TalkTo(john);
 
 
 			player.Move(room);
