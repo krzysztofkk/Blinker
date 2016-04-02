@@ -5,7 +5,6 @@ namespace Blinker
 
 		public Player(string name, Location location) : base(name, location)
 		{
-			
 		}
 
 

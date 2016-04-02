@@ -24,5 +24,12 @@ namespace Blinker
 			Console.Write(content);
 			Console.ResetColor();
 		}
+
+		public static void WriteLog(string content)
+		{
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.WriteLine("*"+content+"*");
+			Console.ResetColor();
+		}
 	}
 }
