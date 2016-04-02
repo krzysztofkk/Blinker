@@ -30,6 +30,14 @@ namespace Blinker
 
 		}
 
+		public void CheckMyItems()
+		{
+			Writer.WriteAction("You are checking your inventory. Available items:\n");
+			foreach (var item in Items)
+				Writer.WriteInfo("["+item.Name+"], ");
+			Writer.WriteAction("\n\n");
+		}
+
 		public void Move(Location targetLocation)
 		{
 			CurrentLocation = targetLocation;

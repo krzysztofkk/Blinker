@@ -44,9 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Creature.cs" />
-    <Compile Include="IMover.cs" />
+    <Compile Include="IMoveable.cs" />
+    <Compile Include="IPickupable.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Npc.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="PickupableItem.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

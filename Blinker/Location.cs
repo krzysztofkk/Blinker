@@ -13,7 +13,9 @@ namespace Blinker
 
 		public List<Location> Exits = new List<Location>();
 		private List<Npc> _npcList = new List<Npc>();
-
+		private List<Item> _items = new List<Item>();
+		private List<PickupableItem> _pickupableItems = new List<PickupableItem>();
+		 
 		public List<Npc> NpcList
 		{
 			get { return _npcList; }

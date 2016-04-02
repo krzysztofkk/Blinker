@@ -20,8 +20,12 @@ namespace Blinker
 			dave.Greet();
 			john.Greet();
 
-			room.NpcList.Remove(dave);
-			anotherRoom.NpcList.Add(dave);
+			var item1 = new PickupableItem("wallet", "leather wallet, almost empty");
+			var item2 = new PickupableItem("keys", "couple of keys on a keychain");
+
+			player.Items.Add(item1);
+			player.Items.Add(item2);
+			player.CheckMyItems();
 
 
 			Console.ReadKey();

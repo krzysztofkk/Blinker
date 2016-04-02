@@ -1,4 +1,6 @@
-﻿namespace Blinker
+﻿using System.Collections.Generic;
+
+namespace Blinker
 {
 	public abstract class Creature
 	{
@@ -7,7 +9,10 @@
 			Name = name;
 			Health = 100;
 			CurrentLocation = location;
+			Items = new List<PickupableItem>();
 		}
+
+		public List<PickupableItem> Items { get; protected set; } 
 
 		public string Name { get; private set; }
 
