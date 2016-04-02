@@ -84,5 +84,13 @@ namespace Blinker
 			CurrentLocation.PickupableItemList.Remove(item);
 			Items.Add(item);
 		}
+
+		public void ThrowOutItem(PickupableItem item)
+		{
+			Writer.WriteAction("You threw out ");
+			Writer.WriteAction(string.Format("[{0}]\n\n", item.Name));
+			Items.Remove(item);
+			CurrentLocation.PickupableItemList.Add(item);
+		}
 	}
 }

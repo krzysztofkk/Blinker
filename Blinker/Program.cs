@@ -40,6 +40,10 @@ namespace Blinker
 			player.CheckMyItems();
 			player.CheckPickupableItemsThere();
 
+			player.ThrowOutItem(item2);
+			player.CheckMyItems();
+			player.CheckPickupableItemsThere();
+
 
 			Console.ReadKey();
 		}
