@@ -55,14 +55,11 @@ namespace Blinker
 
 			player.Move(room);
 
-			john.ReceiveDamage(30);
-			john.ReceiveDamage(30);
-			john.ReceiveDamage(30);
-			john.ReceiveDamage(30);
-			john.ReceiveDamage(30);
-			john.ReceiveDamage(30);
-			dave.ReceiveDamage(10);
-			dave.ReceiveDamage(10);
+			player.Attack(john, 50);
+			player.Attack(john, 50);
+			player.Attack(john, 50);
+
+			player.Attack(dave, 50);
 
 
 

@@ -132,5 +132,11 @@ namespace Blinker
 			Items.Remove(item);
 			CurrentLocation.PickupableItemList.Add(item);
 		}
+
+		public void Attack(Creature target, int amount)
+		{
+			Writer.WriteAction("> You are trying to attack the target.\n");
+			AttackTarget(target, amount);
+		}
 	}
 }
