@@ -62,12 +62,12 @@ namespace Blinker
 		{
 			if (targetLocation != CurrentLocation)
 			{
-				Writer.WriteAction(string.Format("You are moving from {0} to {1}.\n\n", CurrentLocation.Name, targetLocation.Name));
+				Writer.WriteAction(string.Format("You are moving from {0} to {1}.\n", CurrentLocation.Name, targetLocation.Name));
 				CurrentLocation = targetLocation;
 			}
 			else
 			{
-				Writer.WriteAction("You are in that location already.");
+				Writer.WriteAction("You are in that location already.\n");
 			}
 		}
 
@@ -75,6 +75,14 @@ namespace Blinker
 		{
 			Writer.WriteAction(string.Format("You talk to {0}.\n", someone.Name));
 			someone.Greet();
+		}
+
+		public void PickUpItem(PickupableItem item)
+		{
+			Writer.WriteAction("You picked up ");
+			Writer.WriteInfo(string.Format("[{0}]\n\n", item.Name));
+			CurrentLocation.PickupableItemList.Remove(item);
+			Items.Add(item);
 		}
 	}
 }

@@ -36,6 +36,10 @@ namespace Blinker
 			player.TalkTo(dave);
 			player.TalkTo(john);
 
+			player.PickUpItem(item4);
+			player.CheckMyItems();
+			player.CheckPickupableItemsThere();
+
 
 			Console.ReadKey();
 		}
