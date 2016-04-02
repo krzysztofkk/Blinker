@@ -9,10 +9,10 @@ namespace Blinker
 			Name = name;
 			Health = 100;
 			CurrentLocation = location;
-			Items = new List<PickupableItem>();
+			_items = new List<PickupableItem>();
 		}
 
-		public List<PickupableItem> Items { get; protected set; } 
+		private List<PickupableItem> _items;
 
 		public string Name { get; private set; }
 
