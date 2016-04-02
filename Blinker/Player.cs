@@ -14,21 +14,39 @@ namespace Blinker
 
 		public void CheckLocationInfo()
 		{
+			Writer.WriteAction("You are checking where you are.\n");
 			Writer.WriteInfo(string.Format("I am in the [{0}].\nIt's a {1}.\n\n", CurrentLocation.Name, CurrentLocation.Description));
 		}
 
 		public void CheckWhoIsThere()
 		{
+			Writer.WriteAction("You take a quick look at the room.\n");
 			if (CurrentLocation.NpcList.Any())
 			{
 				Writer.WriteInfo("You see ");
-				foreach (Npc n in CurrentLocation.NpcList)
-					Writer.WriteDialog("[" + n.Name + "]" + ", ");
+				foreach (var npc in CurrentLocation.NpcList)
+					Writer.WriteDialog("[" + npc.Name + "]" + ", ");
 				Writer.WriteInfo("there.\n\n");
 			}
 			else
 			{
 				Writer.WriteInfo("The room is empty.\n\n");
+			}
+		}
+
+		public void CheckPickupableItemsThere()
+		{
+			Writer.WriteAction("You take a look around you.\n");
+			if (CurrentLocation.PickupableItemList.Any())
+			{
+				Writer.WriteInfo("You see ");
+				foreach (var i in CurrentLocation.PickupableItemList)
+					Writer.WriteInfo("[" + i.Name + "]" + ", ");
+				Writer.WriteInfo("there.\n\n");
+			}
+			else
+			{
+				Writer.WriteInfo("You don't see any pickupable items there.\n\n");
 			}
 		}
 
@@ -51,7 +69,12 @@ namespace Blinker
 			{
 				Writer.WriteAction("You are in that location already.");
 			}
+		}
 
+		public void TalkTo(Npc someone)
+		{
+			Writer.WriteAction(string.Format("You talk to {0}.\n", someone.Name));
+			someone.Greet();
 		}
 	}
 }

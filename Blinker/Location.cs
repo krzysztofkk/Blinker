@@ -21,6 +21,12 @@ namespace Blinker
 			set { _npcList = value; }
 		}
 
+		public List<PickupableItem> PickupableItemList
+		{
+			get { return _pickupableItems;}
+			set { _pickupableItems = value; }
+		} 
+
 		public string Name { get; set; }
 		public string Description { get; set; }
 	}
