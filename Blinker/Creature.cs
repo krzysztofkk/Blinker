@@ -58,9 +58,10 @@ namespace Blinker
 
 		protected int CalculateHit()
 		{
+			var rnd = _random.Next(-Strength/2, Strength/2);
 			if (EquipedWeapon != null)
-				return Strength + EquipedWeapon.AttackValue;
-			return Strength;
+				return Strength + EquipedWeapon.AttackValue + rnd;
+			return Strength + rnd;
 		}
 
 		protected void AttackTarget(Creature target)
