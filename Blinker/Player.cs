@@ -30,7 +30,6 @@ namespace Blinker
 			{
 				Writer.WriteInfo("The room is empty.\n\n");
 			}
-
 		}
 
 		public void CheckMyItems()
@@ -43,7 +42,16 @@ namespace Blinker
 
 		public void Move(Location targetLocation)
 		{
-			CurrentLocation = targetLocation;
+			if (targetLocation != CurrentLocation)
+			{
+				Writer.WriteAction(string.Format("You are moving from {0} to {1}.\n\n", CurrentLocation.Name, targetLocation.Name));
+				CurrentLocation = targetLocation;
+			}
+			else
+			{
+				Writer.WriteAction("You are in that location already.");
+			}
+
 		}
 	}
 }

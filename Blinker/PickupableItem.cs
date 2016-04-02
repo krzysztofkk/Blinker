@@ -4,8 +4,6 @@ namespace Blinker
 	{
 		public PickupableItem(string name, string description) : base(name, description)
 		{
-			
 		}
-
 	}
 }

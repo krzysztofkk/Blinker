@@ -4,7 +4,6 @@ namespace Blinker
 {
 	public class Location
 	{
-
 		public Location(string name, string description)
 		{
 			Name = name;
@@ -24,6 +23,5 @@ namespace Blinker
 
 		public string Name { get; set; }
 		public string Description { get; set; }
-
 	}
 }
