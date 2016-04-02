@@ -31,12 +31,22 @@ namespace Blinker
 			if (IsAlive())
 			{
 				Health -= amount;
-				//gonna move it to AttackTarget(target) method
-				//Writer.WriteActionHostile(string.Format("Target receives {0} damage.\n", amount));
-				var reaction = (string) ReactionList[_random.Next(ReactionList.Count)];
-				Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, reaction));
+				if (IsAlive())
+				{
+					var reaction = (string)ReactionList[_random.Next(ReactionList.Count)];
+					Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, reaction));
+				}
+				if (!IsAlive())
+				{
+					Writer.WriteDialog(string.Format("{0}", Name));
+					Writer.WriteActionHostile(" has been killed.\n\n");
+				}
 			}
-
+			else
+			{
+				Writer.WriteDialog(string.Format("{0}", Name));
+				Writer.WriteInfo(" is dead already.\n\n");
+			}
 		}
 	}
 }
