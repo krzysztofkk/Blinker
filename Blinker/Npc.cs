@@ -1,6 +1,6 @@
 ﻿namespace Blinker
 {
-	public class Npc : Creature, IMover
+	public class Npc : Creature, IMoveable
 	{
 		private readonly string _greeting;
 

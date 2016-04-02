@@ -1,6 +1,6 @@
 ﻿namespace Blinker
 {
-	public interface IMover
+	public interface IMoveable
 	{
 		void Move(Location targetLocation);
 	}

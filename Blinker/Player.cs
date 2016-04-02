@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace Blinker
 {
-	public class Player : Creature, IMover
+	public class Player : Creature, IMoveable
 	{
 
 		public Player(string name, Location location) : base(name, location)
