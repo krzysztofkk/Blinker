@@ -14,13 +14,21 @@ namespace Blinker
 
 		public void CheckLocationInfo()
 		{
-			Writer.WriteAction("You are checking where you are.\n");
+			Writer.WriteAction("> You are checking where you are.\n");
 			Writer.WriteInfo(string.Format("I am in the [{0}].\nIt's a {1}.\n\n", CurrentLocation.Name, CurrentLocation.Description));
+		}
+
+		public void CheckLocationExits()
+		{
+			Writer.WriteAction("> You are checking where you can go from here.\n");
+			foreach(var exit in CurrentLocation.Exits)
+				Writer.WriteInfo("["+exit.Name+"], ");
+			Writer.WriteInfo("\n\n");
 		}
 
 		public void CheckWhoIsThere()
 		{
-			Writer.WriteAction("You take a quick look at the room.\n");
+			Writer.WriteAction("> You take a quick look at the room.\n");
 			if (CurrentLocation.NpcList.Any())
 			{
 				Writer.WriteInfo("You see ");
@@ -36,7 +44,7 @@ namespace Blinker
 
 		public void CheckPickupableItemsThere()
 		{
-			Writer.WriteAction("You take a look around you.\n");
+			Writer.WriteAction("> You take a look around you.\n");
 			if (CurrentLocation.PickupableItemList.Any())
 			{
 				Writer.WriteInfo("You see ");
@@ -52,7 +60,7 @@ namespace Blinker
 
 		public void CheckMyItems()
 		{
-			Writer.WriteAction("You are checking your inventory. Available items:\n");
+			Writer.WriteAction("> You are checking your inventory. Available items:\n");
 			foreach (var item in Items)
 				Writer.WriteItem("["+item.Name+"], ");
 			Writer.WriteAction("\n\n");
@@ -62,24 +70,24 @@ namespace Blinker
 		{
 			if (targetLocation != CurrentLocation)
 			{
-				Writer.WriteAction(string.Format("You are moving from {0} to {1}.\n", CurrentLocation.Name, targetLocation.Name));
+				Writer.WriteAction(string.Format("> You are moving from {0} to {1}.\n\n", CurrentLocation.Name, targetLocation.Name));
 				CurrentLocation = targetLocation;
 			}
 			else
 			{
-				Writer.WriteAction("You are in that location already.\n");
+				Writer.WriteAction("> You are in that location already.\n\n");
 			}
 		}
 
 		public void TalkTo(Npc someone)
 		{
-			Writer.WriteAction(string.Format("You talk to {0}.\n", someone.Name));
+			Writer.WriteAction(string.Format("> You talk to {0}.\n", someone.Name));
 			someone.Greet();
 		}
 
 		public void PickUpItem(PickupableItem item)
 		{
-			Writer.WriteAction("You picked up ");
+			Writer.WriteAction("> You picked up ");
 			Writer.WriteItem(string.Format("[{0}]\n\n", item.Name));
 			CurrentLocation.PickupableItemList.Remove(item);
 			Items.Add(item);
@@ -87,7 +95,7 @@ namespace Blinker
 
 		public void ThrowOutItem(PickupableItem item)
 		{
-			Writer.WriteAction("You threw out ");
+			Writer.WriteAction("> You threw out ");
 			Writer.WriteItem(string.Format("[{0}]\n\n", item.Name));
 			Items.Remove(item);
 			CurrentLocation.PickupableItemList.Add(item);

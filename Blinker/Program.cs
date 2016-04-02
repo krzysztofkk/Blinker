@@ -8,6 +8,7 @@ namespace Blinker
 		{
 			var room = new Location("Small Room", "tiny room with some people in there");
 			var anotherRoom = new Location("Big room", "huge, cold room");
+			Initializer.ConnectLocations(room, anotherRoom);
 
 			var player = new Player("Test", anotherRoom);
 
@@ -23,12 +24,14 @@ namespace Blinker
 			player.CheckMyItems();
 
 			player.CheckLocationInfo();
+			player.CheckLocationExits();
 			player.CheckWhoIsThere();
 
 
 			player.Move(room);
 
 			player.CheckLocationInfo();
+			player.CheckLocationExits();
 			player.CheckPickupableItemsThere();
 			player.CheckWhoIsThere();
 
