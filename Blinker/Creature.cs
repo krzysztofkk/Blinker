@@ -26,14 +26,14 @@ namespace Blinker
 			return (Health > 0);
 		}
 
-		public void ReceiveDamage(int amount)
+		private void ReceiveDamage(int amount)
 		{
 			if (IsAlive())
 			{
 				Health -= amount;
 				if (IsAlive())
 				{
-					var reaction = (string)ReactionList[_random.Next(ReactionList.Count)];
+					var reaction = ReactionList[_random.Next(ReactionList.Count)];
 					Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, reaction));
 				}
 				if (!IsAlive())
@@ -46,6 +46,19 @@ namespace Blinker
 			{
 				Writer.WriteDialog(string.Format("{0}", Name));
 				Writer.WriteInfo(" is dead already.\n\n");
+			}
+		}
+
+		protected void AttackTarget(Creature target, int amount)
+		{
+			if (IsAlive())
+			{
+				Writer.WriteActionHostile("Target ");
+				Writer.WriteDialog(string.Format("{0}", target.Name));
+				Writer.WriteActionHostile(string.Format(" suffers {0} damage from ", amount));
+				Writer.WriteDialog(string.Format("{0}", Name));
+				Writer.WriteActionHostile("'s attack.\n");
+				target.ReceiveDamage(amount);
 			}
 		}
 	}
