@@ -16,8 +16,6 @@ namespace Blinker
 			room.NpcList.Add(john);
 			room.NpcList.Add(dave);
 
-			room.CheckLocation();
-			room.WhoIsThere();
 			john.Greet();
 			dave.Greet();
 			john.Greet();
@@ -25,7 +23,6 @@ namespace Blinker
 			room.NpcList.Remove(dave);
 			anotherRoom.NpcList.Add(dave);
 
-			anotherRoom.CheckLocation();
 			room.WhoIsThere();
 
 			Console.ReadKey();

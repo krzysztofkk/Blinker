@@ -19,27 +19,5 @@ namespace Blinker
 		public string Name { get; set; }
 		public string Description { get; set; }
 
-		//gonna move that method to Player class soon
-		public void CheckLocation()
-		{
-			 Writer.WriteInfo(string.Format("I am in the [{0}].\nIt's a {1}.\n\n", Name, Description));
-		}
-
-		//this one too
-		public void WhoIsThere()
-		{
-			if (NpcList.Any())
-			{
-				Writer.WriteInfo("You see ");
-				foreach (Npc n in NpcList)
-					Writer.WriteDialog("["+n.Name+"]"+", ");
-				Writer.WriteInfo("there.\n\n");
-			}
-			else
-			{
-				Writer.WriteInfo("The room is empty.\n\n");
-			}
-
-		}
 	}
 }
