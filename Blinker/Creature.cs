@@ -72,7 +72,11 @@ namespace Blinker
 				Writer.WriteDialog(string.Format("{0}", target.Name));
 				Writer.WriteActionHostile(string.Format(" suffers {0} damage from ", amount));
 				Writer.WriteDialog(string.Format("{0}", Name));
-				Writer.WriteActionHostile("'s attack.\n");
+				Writer.WriteActionHostile("'s attack with ");
+				if(EquipedWeapon != null)
+					Writer.WriteItem(EquipedWeapon.Name+".\n");
+				else
+					Writer.WriteActionHostile("bare hands.\n");
 				target.ReceiveDamage(amount);
 			}
 		}
