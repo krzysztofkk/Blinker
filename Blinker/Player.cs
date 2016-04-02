@@ -41,7 +41,7 @@ namespace Blinker
 			{
 				Writer.WriteInfo("You see ");
 				foreach (var i in CurrentLocation.PickupableItemList)
-					Writer.WriteInfo("[" + i.Name + "]" + ", ");
+					Writer.WriteItem("[" + i.Name + "]" + ", ");
 				Writer.WriteInfo("there.\n\n");
 			}
 			else
@@ -54,7 +54,7 @@ namespace Blinker
 		{
 			Writer.WriteAction("You are checking your inventory. Available items:\n");
 			foreach (var item in Items)
-				Writer.WriteInfo("["+item.Name+"], ");
+				Writer.WriteItem("["+item.Name+"], ");
 			Writer.WriteAction("\n\n");
 		}
 
@@ -80,7 +80,7 @@ namespace Blinker
 		public void PickUpItem(PickupableItem item)
 		{
 			Writer.WriteAction("You picked up ");
-			Writer.WriteInfo(string.Format("[{0}]\n\n", item.Name));
+			Writer.WriteItem(string.Format("[{0}]\n\n", item.Name));
 			CurrentLocation.PickupableItemList.Remove(item);
 			Items.Add(item);
 		}
@@ -88,7 +88,7 @@ namespace Blinker
 		public void ThrowOutItem(PickupableItem item)
 		{
 			Writer.WriteAction("You threw out ");
-			Writer.WriteAction(string.Format("[{0}]\n\n", item.Name));
+			Writer.WriteItem(string.Format("[{0}]\n\n", item.Name));
 			Items.Remove(item);
 			CurrentLocation.PickupableItemList.Add(item);
 		}
