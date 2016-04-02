@@ -47,6 +47,8 @@ namespace Blinker
 			player.CheckMyItems();
 			player.CheckPickupableItemsThere();
 
+			player.Move(room);
+
 
 			Console.ReadKey();
 		}

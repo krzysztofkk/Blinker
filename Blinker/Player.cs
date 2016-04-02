@@ -70,8 +70,15 @@ namespace Blinker
 		{
 			if (targetLocation != CurrentLocation)
 			{
-				Writer.WriteAction(string.Format("> You are moving from {0} to {1}.\n\n", CurrentLocation.Name, targetLocation.Name));
-				CurrentLocation = targetLocation;
+				if (CurrentLocation.Exits.Contains(targetLocation))
+				{
+					Writer.WriteAction(string.Format("> You are moving from {0} to {1}.\n\n", CurrentLocation.Name, targetLocation.Name));
+					CurrentLocation = targetLocation;
+				}
+				else
+				{
+					Writer.WriteAction(string.Format("> You cannot go to {0} from {1}.\n\n", targetLocation.Name, CurrentLocation.Name));
+				}
 			}
 			else
 			{
