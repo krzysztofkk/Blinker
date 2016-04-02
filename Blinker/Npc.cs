@@ -9,7 +9,7 @@ namespace Blinker
 		public Npc(string name, Location location) : base(name, location)
 		{
 			_greeting = " ... ";
-			Move(location);
+			location.NpcList.Add(this);
 		}
 
 		public Npc(string name, string greeting, Location location) : base(name, location)
