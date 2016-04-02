@@ -5,12 +5,12 @@ namespace Blinker
 {
 	public class Player : Creature, IMoveable
 	{
-
 		public Player(string name, Location location) : base(name, location)
 		{
+			Items = new List<PickupableItem>();
 		}
 
-		public List<PickupableItem> Items { get; private set; } 
+		public List<PickupableItem> Items { get; set; }
 
 		public void CheckLocationInfo()
 		{
