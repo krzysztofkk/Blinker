@@ -60,6 +60,7 @@ namespace Blinker
 
 			player.Move(room);
 
+			john.EquipWeapon(wpn2);
 			player.Attack(john);
 			dave.Attack(john);
 			player.Attack(john);
@@ -72,9 +73,10 @@ namespace Blinker
 
 			player.Attack(dave);
 
+			dave.EquipWeapon(wpn1);
+			dave.UnequipWeapon(wpn1);
+
 			player.CheckWhoIsThere();
-
-
 
 
 			Console.ReadKey();
