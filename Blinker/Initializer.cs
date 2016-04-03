@@ -6,25 +6,6 @@ namespace Blinker
 		{
 		}
 
-		public static void DisplayInfo()
-		{
-			Writer.WriteLog("# INFO:\n");
-			Writer.WriteInfo("Text");
-			Writer.WriteInfo(" - an information message (i.e room description)\n");
-			Writer.WriteAction("Text");
-			Writer.WriteInfo(" - commited action (i.e picked up item, moved to another location)\n");
-			Writer.WriteActionHostile("Text");
-			Writer.WriteInfo(" - hostile action (i. e fight)\n");
-			Writer.WriteDialog("Text");
-			Writer.WriteInfo(" - a dialog/npc\n");
-			Writer.WriteLocation("Text");
-			Writer.WriteInfo(" - a location (where you can possibly go)\n");
-			Writer.WriteItem("Text");
-			Writer.WriteInfo(" - an item (might be pickupable)\n");
-			Writer.WriteLog("# END INFO\n\n");
-
-		}
-
 		public static void ConnectLocations(Location loc1, Location loc2)
 		{
 			loc1.Exits.Add(loc2);

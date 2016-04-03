@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumerableExtension.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="Creature.cs" />
     <Compile Include="IMoveable.cs" />
