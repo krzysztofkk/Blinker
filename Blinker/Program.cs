@@ -8,20 +8,17 @@ namespace Blinker
 		static void Main(string[] args)
 		{
 			GameManager.ShowMenu();
-			GameManager.DisplayInfo();
 
 			var room = new Location("Small Room", "tiny room with some people in there");
 			var anotherRoom = new Location("Big room", "huge, cold room");
 			Initializer.ConnectLocations(room, anotherRoom);
 
-			var player = new Player("PlayerName", anotherRoom);
-
-			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", player);
-			var item2 = new PickupableItem("keys", "couple of keys on a keychain", player);
+			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", GameManager.player);
+			var item2 = new PickupableItem("keys", "couple of keys on a keychain", GameManager.player);
 			var item3 = new PickupableItem("stone", "tiny, gray stone", room);
 			var item4 = new PickupableItem("empty bottle", "empty irish beer bottle", room);
 			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
-			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", player, 25);
+			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", GameManager.player, 25);
 
 			var john = new Npc("John", "I'm busy right now.", room);
 			john.ReactionList.AddMany("What the hell?", "Stop it!");
@@ -30,54 +27,54 @@ namespace Blinker
 			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", john, 7);
 
 
-			player.CheckMyItems();
+			GameManager.player.CheckMyItems();
 
-			player.EquipWeapon(wpn1);
+			GameManager.player.EquipWeapon(wpn1);
 
-			player.CheckLocationInfo();
-			player.CheckLocationExits();
-			player.CheckWhoIsThere();
-			player.TalkTo(john);
+			GameManager.player.CheckLocationInfo();
+			GameManager.player.CheckLocationExits();
+			GameManager.player.CheckWhoIsThere();
+			GameManager.player.TalkTo(john);
 
 
-			player.Move(room);
+			GameManager.player.Move(room);
 
-			player.CheckLocationInfo();
-			player.CheckLocationExits();
-			player.CheckPickupableItemsThere();
-			player.CheckWhoIsThere();
+			GameManager.player.CheckLocationInfo();
+			GameManager.player.CheckLocationExits();
+			GameManager.player.CheckPickupableItemsThere();
+			GameManager.player.CheckWhoIsThere();
 
-			player.TalkTo(john);
-			player.TalkTo(dave);
-			player.TalkTo(john);
+			GameManager.player.TalkTo(john);
+			GameManager.player.TalkTo(dave);
+			GameManager.player.TalkTo(john);
 
-			player.PickUpItem(item4);
-			player.CheckMyItems();
-			player.CheckPickupableItemsThere();
+			GameManager.player.PickUpItem(item4);
+			GameManager.player.CheckMyItems();
+			GameManager.player.CheckPickupableItemsThere();
 
-			player.ThrowOutItem(item2);
-			player.CheckMyItems();
-			player.CheckPickupableItemsThere();
+			GameManager.player.ThrowOutItem(item2);
+			GameManager.player.CheckMyItems();
+			GameManager.player.CheckPickupableItemsThere();
 
-			player.Move(room);
+			GameManager.player.Move(room);
 
 			john.EquipWeapon(wpn2);
-			player.Attack(john);
+			GameManager.player.Attack(john);
 			dave.Attack(john);
-			player.Attack(john);
-			player.Attack(john);
+			GameManager.player.Attack(john);
+			GameManager.player.Attack(john);
 			dave.Attack(john);
 
-			player.UnequipWeapon(wpn1);
-			player.EquipWeapon(wpn2);
-			player.UnequipWeapon(wpn2);
+			GameManager.player.UnequipWeapon(wpn1);
+			GameManager.player.EquipWeapon(wpn2);
+			GameManager.player.UnequipWeapon(wpn2);
 
-			player.Attack(dave);
+			GameManager.player.Attack(dave);
 
 			dave.EquipWeapon(wpn1);
 			dave.UnequipWeapon(wpn1);
 
-			player.CheckWhoIsThere();
+			GameManager.player.CheckWhoIsThere();
 
 
 			Console.ReadKey();
