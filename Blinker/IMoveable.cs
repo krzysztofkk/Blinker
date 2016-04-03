@@ -2,6 +2,6 @@
 {
 	public interface IMoveable
 	{
-		void Move(Location targetLocation);
+		void MoveTo(Location targetLocation);
 	}
 }

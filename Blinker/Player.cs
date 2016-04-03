@@ -73,7 +73,7 @@ namespace Blinker
 			}
 		}
 
-		public void CheckMyItems()
+		public void CheckInventory()
 		{
 			Writer.WriteAction("> You are checking your inventory. Available items:\n");
 			var index = 0;
@@ -86,7 +86,7 @@ namespace Blinker
 			Writer.WriteAction("\n\n");
 		}
 
-		public void Move(Location targetLocation)
+		public void MoveTo(Location targetLocation)
 		{
 			if (targetLocation != CurrentLocation)
 			{

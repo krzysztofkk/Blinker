@@ -135,7 +135,7 @@ namespace Blinker
 					if (location != null)
 					{
 						ShowActionMenu();
-						Player.Move(location);
+						Player.MoveTo(location);
 						Console.ReadKey();
 					}
 					break;
@@ -176,7 +176,7 @@ namespace Blinker
 					}
 					break;
 				case 5:
-					Player.CheckMyItems();
+					Player.CheckInventory();
 					Console.WriteLine("What do you want to drop?");
 					parameter = Console.ReadLine();
 					var droppedItem = items.Find(x => x.Name == parameter);
@@ -188,7 +188,7 @@ namespace Blinker
 					}
 					break;
 				case 6:
-					Player.CheckMyItems();
+					Player.CheckInventory();
 					Console.WriteLine("What do you want to equip?");
 					parameter = Console.ReadLine();
 					var equippedItem = items.Find(x => x.Name == parameter);
@@ -227,7 +227,7 @@ namespace Blinker
 					Console.ReadKey();
 					break;
 				case 12:
-					Player.CheckMyItems();
+					Player.CheckInventory();
 					Console.ReadKey();
 					break;
 				default:

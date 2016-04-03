@@ -19,7 +19,7 @@ namespace Blinker
 			_greeting = greeting;
 			ReactionList.Clear();
 			ReactionList.Add("Argh!");
-			Move(location);
+			MoveTo(location);
 		}
 
 		public void Greet()
@@ -27,7 +27,7 @@ namespace Blinker
 			Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, _greeting));
 		}
 
-		public void Move(Location targetLocation)
+		public void MoveTo(Location targetLocation)
 		{
 			CurrentLocation.NpcList.Remove(this);
 			CurrentLocation = targetLocation;
