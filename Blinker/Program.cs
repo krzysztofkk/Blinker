@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace Blinker
 {
@@ -21,11 +22,11 @@ namespace Blinker
 			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
 			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", player, 25);
 
-
 			var john = new Npc("John", "I'm busy right now.", room);
 			john.ReactionList.AddMany("What the hell?", "Stop it!");
 			var dave = new Npc("Dave", "Hello! What do you need?", room);
 			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!");
+			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", john, 7);
 
 
 			player.CheckMyItems();
@@ -66,6 +67,8 @@ namespace Blinker
 			dave.Attack(john);
 
 			player.UnequipWeapon(wpn1);
+			player.EquipWeapon(wpn2);
+			player.UnequipWeapon(wpn2);
 
 			player.Attack(dave);
 

@@ -160,13 +160,27 @@ namespace Blinker
 		public new void EquipWeapon(PickupableItem weapon)
 		{
 			Writer.WriteAction("> You are trying to equip a weapon.\n");
-			base.EquipWeapon(weapon);
+			if (Items.Contains(weapon))
+			{
+				base.EquipWeapon(weapon);
+			}
+			else
+			{
+				Writer.WriteInfo("You don't have this item.\n\n");
+			}
 		}
 
 		public new void UnequipWeapon(PickupableItem weapon)
 		{
 			Writer.WriteAction("> You are trying to unequip a weapon.\n");
-			base.UnequipWeapon(weapon);
+			if (Items.Contains(weapon))
+			{
+				base.UnequipWeapon(weapon);
+			}
+			else
+			{
+				Writer.WriteInfo("You don't have this item.\n\n");
+			}
 		}
 	}
 }
