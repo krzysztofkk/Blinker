@@ -4,6 +4,7 @@ namespace Blinker
 {
 	public static class Writer
 	{
+		private static ConsoleColor defaultColor = ConsoleColor.White;
 		public static void WriteDialog(string content)
 		{
 			Write(content, ConsoleColor.Green);
@@ -43,7 +44,7 @@ namespace Blinker
 		{
 			Console.ForegroundColor = color;
 			Console.Write(content);
-			Console.ResetColor();
+			Console.ForegroundColor = defaultColor;
 		}
 	}
 }
