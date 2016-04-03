@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Blinker
 {
 	public static class GameManager
 	{
-		public static Player player;
-		private static Location startingLocation;
-		private static bool gameStarted;
+		public static Player Player;
+		private static Location _startingLocation;
+		private static bool _gameStarted;
 
 		private static List<Location> locations = new List<Location>();
 		private static List<Creature> creatures = new List<Creature>();
@@ -16,11 +15,11 @@ namespace Blinker
 
 		public static void Run()
 		{
-			while(gameStarted == false)
+			while(_gameStarted == false)
 				ShowMenu();
 			while (true)
 				Play();
-
+			// ReSharper disable once FunctionNeverReturns
 		}
 
 		private static void Play()
@@ -34,7 +33,7 @@ namespace Blinker
 			ClearConsole();
 			Initialize();
 			CreateNewPlayer();
-			gameStarted = true;
+			_gameStarted = true;
 		}
 
 		private static void ClearConsole()
@@ -101,68 +100,68 @@ namespace Blinker
 			switch (option)
 			{
 				case 1:
-					player.CheckLocationExits();
+					Player.CheckLocationExits();
 					Console.WriteLine("Where do you want to go?");
 					parameter = Console.ReadLine();
 					var location = locations.Find(x => x.Name == parameter);
 					if (location != null)
 					{
-						player.Move(location);
+						Player.Move(location);
 						Console.ReadKey();
 					}
 					break;
 				case 2:
-					player.CheckWhoIsThere();
+					Player.CheckWhoIsThere();
 					Console.WriteLine("Who do you want to talk to?");
 					parameter = Console.ReadLine();
 					var npc = creatures.Find(x => x.Name == parameter);
 					if (npc != null)
 					{
-						player.TalkTo((Npc)npc);
+						Player.TalkTo((Npc)npc);
 						Console.ReadKey();
 					}
 					break;
 				case 3:
-					player.CheckWhoIsThere();
+					Player.CheckWhoIsThere();
 					Console.WriteLine("Who do you want to attack?");
 					parameter = Console.ReadLine();
 					var creature = creatures.Find(x => x.Name == parameter);
 					if (creature != null)
 					{
-						player.Attack(creature);
+						Player.Attack(creature);
 						Console.ReadKey();
 					}
 					break;
 				case 4:
-					player.CheckPickupableItemsThere();
+					Player.CheckPickupableItemsThere();
 					Console.WriteLine("What do you want to pick up?");
 					parameter = Console.ReadLine();
 					var pickedItem = items.Find(x => x.Name == parameter);
 					if (pickedItem != null)
 					{
-						player.PickUpItem((PickupableItem)pickedItem);
+						Player.PickUpItem((PickupableItem)pickedItem);
 						Console.ReadKey();
 					}
 					break;
 				case 5:
-					player.CheckMyItems();
+					Player.CheckMyItems();
 					Console.WriteLine("What do you want to drop?");
 					parameter = Console.ReadLine();
 					var droppedItem = items.Find(x => x.Name == parameter);
 					if (droppedItem != null)
 					{
-						player.ThrowOutItem((PickupableItem)droppedItem);
+						Player.ThrowOutItem((PickupableItem)droppedItem);
 						Console.ReadKey();
 					}
 					break;
 				case 6:
-					player.CheckMyItems();
+					Player.CheckMyItems();
 					Console.WriteLine("What do you want to equip?");
 					parameter = Console.ReadLine();
 					var equippedItem = items.Find(x => x.Name == parameter);
 					if (equippedItem != null)
 					{
-						player.EquipWeapon((Weapon)equippedItem);
+						Player.EquipWeapon((Weapon)equippedItem);
 						Console.ReadKey();
 					}
 					break;
@@ -172,28 +171,28 @@ namespace Blinker
 					var unequippedItem = items.Find(x => x.Name == parameter);
 					if (unequippedItem != null)
 					{
-						player.UnequipWeapon((Weapon)unequippedItem);
+						Player.UnequipWeapon((Weapon)unequippedItem);
 						Console.ReadKey();
 					}
 					break;
 				case 8:
-					player.CheckLocationInfo();
+					Player.CheckLocationInfo();
 					Console.ReadKey();
 					break;
 				case 9:
-					player.CheckWhoIsThere();
+					Player.CheckWhoIsThere();
 					Console.ReadKey();
 					break;
 				case 10:
-					player.CheckPickupableItemsThere();
+					Player.CheckPickupableItemsThere();
 					Console.ReadKey();
 					break;
 				case 11:
-					player.CheckLocationExits();
+					Player.CheckLocationExits();
 					Console.ReadKey();
 					break;
 				case 12:
-					player.CheckMyItems();
+					Player.CheckMyItems();
 					Console.ReadKey();
 					break;
 				default:
@@ -227,37 +226,69 @@ namespace Blinker
 			ClearConsole();
 			Console.WriteLine("Write your name:");
 			var name = Console.ReadLine();
-			player = new Player(name, startingLocation);
+			Player = new Player(name, _startingLocation);
 		}
 
 		private static void Initialize()
 		{
-			var room = new Location("small room", "tiny room with some people in there");
-			var anotherRoom = new Location("big room", "huge, cold room");
-			ConnectLocations(room, anotherRoom);
-			startingLocation = room;
+			//## MANUAL ##
+			//PART I
+			//1. LOCATIONS
+			//location schema: Location(name, description)
+			//connecting two locations: ConnectLocations(loc1, loc2)
+			//2. ITEMS
+			//item schema: PickupableItem(name, description, location/creature)
+			//3. NPC (or creature)
+			//npc schema: Npc(name, greeting, location)
+			//adding attack reactions: person.ReactionList.Addmany(string, string, string, ...)
+			//PART II
+			//1. add your locations, items and npcs to lists (locations, creatures, items)
+			//2. remember to set _startingLocation
+			//## END MANUAL ##
 
-			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", room);
+			var room = new Location("small room", "tiny room with some people in there");
+			var storageRoom = new Location("storage room", "storage room with some brooms");
+			var anotherRoom = new Location("big room", "huge, cold room");
+			var garden = new Location("garden", "green, grassy garden with one big tree in the centre");
+			ConnectLocations(room, storageRoom);
+			ConnectLocations(room, anotherRoom);
+			ConnectLocations(anotherRoom, garden);
+
+			_startingLocation = room;
+
+			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", garden);
 			var item2 = new PickupableItem("keys", "couple of keys on a keychain", room);
 			var item3 = new PickupableItem("stone", "tiny, gray stone", room);
 			var item4 = new PickupableItem("empty bottle", "empty irish beer bottle", room);
-			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
+			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", garden);
+			var item6 = new PickupableItem("long broom", "long, old broom", storageRoom);
+			var item7 = new PickupableItem("small broom", "short, brown broom", storageRoom);
 			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", room, 25);
+			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", anotherRoom, 7);
 
 			var john = new Npc("John", "I'm busy right now.", room);
-			john.ReactionList.AddMany("What the hell?", "Stop it!");
+			john.ReactionList.AddMany("What the hell?", "Stop it!", "What are you doing man?", "Stop hitting me!");
+
 			var dave = new Npc("Dave", "Hello! What do you need?", room);
-			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!");
-			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", john, 7);
+			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!", "That hurts!");
+
+			var andrew = new Npc("Andrew", "Go away.", garden);
+			andrew.ReactionList.AddMany("...");
+
+			var janitor = new Npc("Janitor", "I am a janitor.", storageRoom);
+			janitor.ReactionList.AddMany("Ouch, that hurts!", "Please, stop it.", "Why are you doing that?");
 
 			locations.AddMany(
 				room,
-				anotherRoom
+				anotherRoom,
+				garden,
+				storageRoom
 				);
 
 			creatures.AddMany(
 				john,
-				dave
+				dave,
+				andrew
 				);
 
 			items.AddMany(
@@ -266,6 +297,8 @@ namespace Blinker
 				item3,
 				item4,
 				item5,
+				item6,
+				item7,
 				wpn1,
 				wpn2
 				);
