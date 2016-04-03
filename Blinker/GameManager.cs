@@ -16,66 +16,40 @@ namespace Blinker
 
 		public static void Run()
 		{
-			if(gameStarted == false)
+			while(gameStarted == false)
 				ShowMenu();
 			while (true)
 				Play();
 
 		}
 
-		public static void Initialize()
+		private static void Play()
 		{
-			var room = new Location("Small Room", "tiny room with some people in there");
-			var anotherRoom = new Location("Big room", "huge, cold room");
-			Initializer.ConnectLocations(room, anotherRoom);
-			startingLocation = room;
-
-			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", room);
-			var item2 = new PickupableItem("keys", "couple of keys on a keychain", room);
-			var item3 = new PickupableItem("stone", "tiny, gray stone", room);
-			var item4 = new PickupableItem("empty bottle", "empty irish beer bottle", room);
-			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
-			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", room, 25);
-
-			var john = new Npc("John", "I'm busy right now.", room);
-			john.ReactionList.AddMany("What the hell?", "Stop it!");
-			var dave = new Npc("Dave", "Hello! What do you need?", room);
-			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!");
-			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", john, 7);
-
-			locations.AddMany(
-				room,
-				anotherRoom
-				);
-
-			creatures.AddMany(
-				john,
-				dave
-				);
-
-			items.AddMany(
-				item1,
-				item2,
-				item3,
-				item4,
-				item5,
-				wpn1,
-				wpn2
-				);
+			ClearConsole();
+			DoSomething();
 		}
 
-		public static void ClearConsole()
+		private static void NewGame()
+		{
+			ClearConsole();
+			Initialize();
+			CreateNewPlayer();
+			gameStarted = true;
+		}
+
+		private static void ClearConsole()
 		{
 			Console.Clear();
 		}
 
-		public static int ReadOption()
+		private static int ReadOption()
 		{
-			int option = Int32.Parse(Console.ReadLine());
+			int option;
+			Int32.TryParse(Console.ReadLine(), out option);
 			return option;
 		}
 
-		public static void ShowMenu()
+		private static void ShowMenu()
 		{
 			ClearConsole();
 			Console.WriteLine("1. Start new game");
@@ -85,7 +59,7 @@ namespace Blinker
 			ChooseMenuOption();
 		}
 
-		public static void ChooseMenuOption()
+		private static void ChooseMenuOption()
 		{
 			var option = ReadOption();
 			switch (option)
@@ -104,71 +78,7 @@ namespace Blinker
 			}
 		}
 
-		public static void NewGame()
-		{
-			ClearConsole();
-			Initialize();
-			CreateNewPlayer();
-			gameStarted = true;
-		}
-
-		public static void Play()
-		{
-			ClearConsole();
-			Console.WriteLine("What do you want to do?");
-			Console.WriteLine("1. Check something");
-			Console.WriteLine("2. Do something");
-			var option = ReadOption();
-			switch (option)
-			{
-				case 1:
-					CheckSomething();
-					break;
-				case 2:
-					DoSomething();
-					break;
-			}
-		}
-
-		public static void CheckSomething()
-		{
-			ClearConsole();
-			Console.WriteLine("What do you want to check?");
-			Console.WriteLine("1. Location - info");
-			Console.WriteLine("2. Location - who is there");
-			Console.WriteLine("3. Location - what items are there");
-			Console.WriteLine("4. Location - where can I go from here");
-			Console.WriteLine("5. Player - show me my inventory");
-			var option = ReadOption();
-			switch (option)
-			{
-				case 1:
-					player.CheckLocationInfo();
-					Console.ReadKey();
-					break;
-				case 2:
-					player.CheckWhoIsThere();
-					Console.ReadKey();
-					break;
-				case 3:
-					player.CheckPickupableItemsThere();
-					Console.ReadKey();
-					break;
-				case 4:
-					player.CheckLocationExits();
-					Console.ReadKey();
-					break;
-				case 5:
-					player.CheckMyItems();
-					Console.ReadKey();
-					break;
-				default:
-					Console.WriteLine("Wrong option");
-					break;
-			}
-		}
-
-		public static void DoSomething()
+		private static void DoSomething()
 		{
 			ClearConsole();
 			Console.WriteLine("What do you want to do?");
@@ -179,6 +89,11 @@ namespace Blinker
 			Console.WriteLine("5. Throw out item");
 			Console.WriteLine("6. Equip item");
 			Console.WriteLine("7. Unequip item");
+			Console.WriteLine("8. Check location info");
+			Console.WriteLine("9. Check who is here");
+			Console.WriteLine("10. Check what items are there");
+			Console.WriteLine("11. Check where can I go from here");
+			Console.WriteLine("12. Check my inventory");
 
 			var option = ReadOption();
 			string parameter;
@@ -261,13 +176,33 @@ namespace Blinker
 						Console.ReadKey();
 					}
 					break;
+				case 8:
+					player.CheckLocationInfo();
+					Console.ReadKey();
+					break;
+				case 9:
+					player.CheckWhoIsThere();
+					Console.ReadKey();
+					break;
+				case 10:
+					player.CheckPickupableItemsThere();
+					Console.ReadKey();
+					break;
+				case 11:
+					player.CheckLocationExits();
+					Console.ReadKey();
+					break;
+				case 12:
+					player.CheckMyItems();
+					Console.ReadKey();
+					break;
 				default:
 					Console.WriteLine("Wrong option");
 					break;
 			}
 		}
 
-		public static void DisplayInfo()
+		private static void DisplayInfo()
 		{
 			ClearConsole();
 			Writer.WriteLog("# INFO:\n");
@@ -287,12 +222,61 @@ namespace Blinker
 			Console.ReadKey();
 		}
 
-		public static void CreateNewPlayer()
+		private static void CreateNewPlayer()
 		{
 			ClearConsole();
 			Console.WriteLine("Write your name:");
 			var name = Console.ReadLine();
 			player = new Player(name, startingLocation);
+		}
+
+		private static void Initialize()
+		{
+			var room = new Location("small room", "tiny room with some people in there");
+			var anotherRoom = new Location("big room", "huge, cold room");
+			ConnectLocations(room, anotherRoom);
+			startingLocation = room;
+
+			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", room);
+			var item2 = new PickupableItem("keys", "couple of keys on a keychain", room);
+			var item3 = new PickupableItem("stone", "tiny, gray stone", room);
+			var item4 = new PickupableItem("empty bottle", "empty irish beer bottle", room);
+			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
+			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", room, 25);
+
+			var john = new Npc("John", "I'm busy right now.", room);
+			john.ReactionList.AddMany("What the hell?", "Stop it!");
+			var dave = new Npc("Dave", "Hello! What do you need?", room);
+			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!");
+			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", john, 7);
+
+			locations.AddMany(
+				room,
+				anotherRoom
+				);
+
+			creatures.AddMany(
+				john,
+				dave
+				);
+
+			items.AddMany(
+				item1,
+				item2,
+				item3,
+				item4,
+				item5,
+				wpn1,
+				wpn2
+				);
+		}
+
+		private static void ConnectLocations(Location loc1, Location loc2)
+		{
+			if (!loc1.Exits.Contains(loc2))
+				loc1.Exits.Add(loc2);
+			if (!loc2.Exits.Contains(loc1))
+				loc2.Exits.Add(loc1);
 		}
 	}
 }
