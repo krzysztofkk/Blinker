@@ -78,7 +78,6 @@ namespace Blinker
 		public static void ShowMenu()
 		{
 			ClearConsole();
-			Console.WriteLine("\t\t# BLINKER #");
 			Console.WriteLine("1. Start new game");
 			Console.WriteLine("2. Load game");
 			Console.WriteLine("3. Display info");
@@ -180,45 +179,68 @@ namespace Blinker
 			Console.WriteLine("5. Throw out item");
 			Console.WriteLine("6. Equip item");
 			Console.WriteLine("7. Unequip item");
+
 			var option = ReadOption();
 			Console.WriteLine("Type action target:");
 			var parameter = Console.ReadLine();
+
 			switch (option)
 			{
 				case 1:
 					var location = locations.Find(x => x.Name == parameter);
-					player.Move(location);
-					Console.ReadKey();
+					if (location != null)
+					{
+						player.Move(location);
+						Console.ReadKey();
+					}
 					break;
 				case 2:
 					var npc = creatures.Find(x => x.Name == parameter);
-					player.TalkTo((Npc)npc);
-					Console.ReadKey();
+					if (npc != null)
+					{
+						player.TalkTo((Npc)npc);
+						Console.ReadKey();
+					}
 					break;
 				case 3:
 					var creature = creatures.Find(x => x.Name == parameter);
-					player.Attack(creature);
-					Console.ReadKey();
+					if (creature != null)
+					{
+						player.Attack(creature);
+						Console.ReadKey();
+					}
 					break;
 				case 4:
 					var pickedItem = items.Find(x => x.Name == parameter);
-					player.PickUpItem((PickupableItem)pickedItem);
-					Console.ReadKey();
+					if (pickedItem != null)
+					{
+						player.PickUpItem((PickupableItem)pickedItem);
+						Console.ReadKey();
+					}
 					break;
 				case 5:
 					var droppedItem = items.Find(x => x.Name == parameter);
-					player.ThrowOutItem((PickupableItem)droppedItem);
-					Console.ReadKey();
+					if (droppedItem != null)
+					{
+						player.ThrowOutItem((PickupableItem)droppedItem);
+						Console.ReadKey();
+					}
 					break;
 				case 6:
 					var equippedItem = items.Find(x => x.Name == parameter);
-					player.EquipWeapon((Weapon)equippedItem);
-					Console.ReadKey();
+					if (equippedItem != null)
+					{
+						player.EquipWeapon((Weapon)equippedItem);
+						Console.ReadKey();
+					}
 					break;
 				case 7:
 					var unequippedItem = items.Find(x => x.Name == parameter);
-					player.UnequipWeapon((Weapon)unequippedItem);
-					Console.ReadKey();
+					if (unequippedItem != null)
+					{
+						player.UnequipWeapon((Weapon)unequippedItem);
+						Console.ReadKey();
+					}
 					break;
 				default:
 					Console.WriteLine("Wrong option");
@@ -243,6 +265,7 @@ namespace Blinker
 			Writer.WriteItem("Text");
 			Writer.WriteInfo(" - an item (might be pickupable)\n");
 			Writer.WriteLog("# END INFO\n\n");
+			Console.ReadKey();
 		}
 
 		public static void CreateNewPlayer()
