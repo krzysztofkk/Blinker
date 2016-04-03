@@ -41,6 +41,8 @@ namespace Blinker
 				{
 					if (index > 0) Writer.WriteInfo(", ");
 					Writer.WriteDialog(npc.Name);
+					if(!npc.IsAlive())
+						Writer.WriteInfo("(dead)");
 					index++;
 				}
 				Writer.WriteInfo(" there.\n\n");

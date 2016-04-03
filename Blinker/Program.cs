@@ -64,6 +64,8 @@ namespace Blinker
 
 			player.Attack(dave);
 
+			player.CheckWhoIsThere();
+
 
 
 			Console.ReadKey();
