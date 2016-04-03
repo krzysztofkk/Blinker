@@ -15,7 +15,8 @@ namespace Blinker
 
 		public static void Run()
 		{
-			while(_gameStarted == false)
+			Console.ForegroundColor = ConsoleColor.White;
+			while (_gameStarted == false)
 				ShowMenu();
 			while (true)
 				Play();
@@ -25,6 +26,7 @@ namespace Blinker
 		private static void Play()
 		{
 			ClearConsole();
+			Console.ForegroundColor = ConsoleColor.White;
 			DoSomething();
 		}
 
@@ -77,7 +79,7 @@ namespace Blinker
 			}
 		}
 
-		private static void DoSomething()
+		private static void ShowDoSomethingMenu()
 		{
 			ClearConsole();
 			Console.WriteLine("What do you want to do?");
@@ -93,7 +95,11 @@ namespace Blinker
 			Console.WriteLine("10. Check what items are there");
 			Console.WriteLine("11. Check where can I go from here");
 			Console.WriteLine("12. Check my inventory");
+		}
 
+		private static void DoSomething()
+		{
+			ShowDoSomethingMenu();
 			var option = ReadOption();
 			string parameter;
 
@@ -161,7 +167,7 @@ namespace Blinker
 					var equippedItem = items.Find(x => x.Name == parameter);
 					if (equippedItem != null)
 					{
-						Player.EquipWeapon((Weapon)equippedItem);
+						Player.EquipWeapon(equippedItem);
 						Console.ReadKey();
 					}
 					break;
@@ -171,7 +177,7 @@ namespace Blinker
 					var unequippedItem = items.Find(x => x.Name == parameter);
 					if (unequippedItem != null)
 					{
-						Player.UnequipWeapon((Weapon)unequippedItem);
+						Player.UnequipWeapon(unequippedItem);
 						Console.ReadKey();
 					}
 					break;
@@ -229,6 +235,7 @@ namespace Blinker
 			Player = new Player(name, _startingLocation);
 		}
 
+		//this might be used to load "story" from file in the future, right now it's a mess
 		private static void Initialize()
 		{
 			//## MANUAL ##
@@ -288,7 +295,8 @@ namespace Blinker
 			creatures.AddMany(
 				john,
 				dave,
-				andrew
+				andrew,
+				janitor
 				);
 
 			items.AddMany(

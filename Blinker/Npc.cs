@@ -40,10 +40,10 @@ namespace Blinker
 			AttackTarget(target);
 		}
 
-		public new void EquipWeapon(PickupableItem weapon)
+		public new void EquipWeapon(Item weapon)
 		{
 			Writer.WriteAction(String.Format("> {0} is trying to equip a weapon.\n", Name));
-			if (Items.Contains(weapon))
+			if (Items.Contains((PickupableItem)weapon))
 			{
 				base.EquipWeapon(weapon);
 			}
@@ -53,10 +53,10 @@ namespace Blinker
 			}
 		}
 
-		public new void UnequipWeapon(PickupableItem weapon)
+		public new void UnequipWeapon(Item weapon)
 		{
 			Writer.WriteAction(string.Format("> {0} is trying to unequip a weapon.\n", Name));
-			if (Items.Contains(weapon))
+			if (Items.Contains((PickupableItem)weapon))
 			{
 				base.UnequipWeapon(weapon);
 			}

@@ -82,9 +82,9 @@ namespace Blinker
 			}
 		}
 
-		protected void EquipWeapon(PickupableItem weapon)
+		protected void EquipWeapon(Item weapon)
 		{
-			if (Items.Contains(weapon))
+			if (Items.Contains((PickupableItem)weapon))
 			{
 				if (weapon is Weapon)
 				{
@@ -95,10 +95,14 @@ namespace Blinker
 					Writer.WriteInfo(" equips ");
 					Writer.WriteItem(string.Format("{0}\n\n", weapon.Name));
 				}
+				else
+				{
+					Writer.WriteInfo("Cannot equip that.\n\n");
+				}
 			}
 		}
 
-		protected void UnequipWeapon(PickupableItem weapon)
+		protected void UnequipWeapon(Item weapon)
 		{
 			if (EquipedWeapon == weapon)
 			{

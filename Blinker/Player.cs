@@ -157,7 +157,7 @@ namespace Blinker
 			AttackTarget(target);
 		}
 
-		public new void EquipWeapon(PickupableItem weapon)
+		public new void EquipWeapon(Item weapon)
 		{
 			Writer.WriteAction("> You are trying to equip a weapon.\n");
 			if (Items.Contains(weapon))
@@ -170,7 +170,7 @@ namespace Blinker
 			}
 		}
 
-		public new void UnequipWeapon(PickupableItem weapon)
+		public new void UnequipWeapon(Item weapon)
 		{
 			Writer.WriteAction("> You are trying to unequip a weapon.\n");
 			if (Items.Contains(weapon))
