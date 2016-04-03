@@ -17,20 +17,21 @@ namespace Blinker
 		{
 			Console.ForegroundColor = ConsoleColor.White;
 			while (_gameStarted == false)
-				ShowMenu();
+				ShowMainMenu();
 			while (true)
 				Play();
 			// ReSharper disable once FunctionNeverReturns
 		}
 
+		//right now it's obsolete, gonna keep it though
 		private static void Play()
 		{
 			ClearConsole();
 			Console.ForegroundColor = ConsoleColor.White;
-			DoSomething();
+			ExecuteAction();
 		}
 
-		private static void NewGame()
+		private static void StartNewGame()
 		{
 			ClearConsole();
 			Initialize();
@@ -50,7 +51,7 @@ namespace Blinker
 			return option;
 		}
 
-		private static void ShowMenu()
+		private static void ShowMainMenu()
 		{
 			ClearConsole();
 			BreakLine();
@@ -59,7 +60,7 @@ namespace Blinker
 			Console.WriteLine(" 3. Display info");
 			Console.WriteLine(" 4. Exit");
 			BreakLine();
-			ChooseMenuOption();
+			ExecuteMainMenuAction();
 		}
 
 		private static void BreakLine()
@@ -67,26 +68,26 @@ namespace Blinker
 			Console.WriteLine("-------------------------------------------------------------------");
 		}
 
-		private static void ChooseMenuOption()
+		private static void ExecuteMainMenuAction()
 		{
 			var option = ReadOption();
 			switch (option)
 			{
 				case 1:
-					NewGame();
+					StartNewGame();
 					break;
 				case 2:
-					ShowMenu();
+					ShowMainMenu();
 					break;
 				case 3:
-					DisplayInfo();
+					ShowHelp();
 					break;
 				case 4:
 					break;
 			}
 		}
 
-		private static void ShowDoSomethingMenu()
+		private static void ShowActionMenu()
 		{
 			ClearConsole();
 			BreakLine();
@@ -100,7 +101,7 @@ namespace Blinker
 			BreakLine();
 		}
 
-		/*private static void ShowDoSomethingMenu()
+		/*private static void ShowActionMenu()
 		{
 			ClearConsole();
 			Console.WriteLine("What do you want to do?");
@@ -118,9 +119,9 @@ namespace Blinker
 			Console.WriteLine("12. Check my inventory");
 		}*/
 
-		private static void DoSomething()
+		private static void ExecuteAction()
 		{
-			ShowDoSomethingMenu();
+			ShowActionMenu();
 			var option = ReadOption();
 			string parameter;
 
@@ -133,7 +134,7 @@ namespace Blinker
 					var location = locations.Find(x => x.Name == parameter);
 					if (location != null)
 					{
-						ShowDoSomethingMenu();
+						ShowActionMenu();
 						Player.Move(location);
 						Console.ReadKey();
 					}
@@ -145,7 +146,7 @@ namespace Blinker
 					var npc = creatures.Find(x => x.Name == parameter);
 					if (npc != null)
 					{
-						ShowDoSomethingMenu();
+						ShowActionMenu();
 						Player.TalkTo((Npc)npc);
 						Console.ReadKey();
 					}
@@ -157,7 +158,7 @@ namespace Blinker
 					var creature = creatures.Find(x => x.Name == parameter);
 					if (creature != null)
 					{
-						ShowDoSomethingMenu();
+						ShowActionMenu();
 						Player.Attack(creature);
 						Console.ReadKey();
 					}
@@ -169,7 +170,7 @@ namespace Blinker
 					var pickedItem = items.Find(x => x.Name == parameter);
 					if (pickedItem != null)
 					{
-						ShowDoSomethingMenu();
+						ShowActionMenu();
 						Player.PickUpItem((PickupableItem)pickedItem);
 						Console.ReadKey();
 					}
@@ -181,7 +182,7 @@ namespace Blinker
 					var droppedItem = items.Find(x => x.Name == parameter);
 					if (droppedItem != null)
 					{
-						ShowDoSomethingMenu();
+						ShowActionMenu();
 						Player.ThrowOutItem((PickupableItem)droppedItem);
 						Console.ReadKey();
 					}
@@ -193,7 +194,7 @@ namespace Blinker
 					var equippedItem = items.Find(x => x.Name == parameter);
 					if (equippedItem != null)
 					{
-						ShowDoSomethingMenu();
+						ShowActionMenu();
 						Player.EquipWeapon(equippedItem);
 						Console.ReadKey();
 					}
@@ -204,7 +205,7 @@ namespace Blinker
 					var unequippedItem = items.Find(x => x.Name == parameter);
 					if (unequippedItem != null)
 					{
-						ShowDoSomethingMenu();
+						ShowActionMenu();
 						Player.UnequipWeapon(unequippedItem);
 						Console.ReadKey();
 					}
@@ -235,7 +236,7 @@ namespace Blinker
 			}
 		}
 
-		private static void DisplayInfo()
+		private static void ShowHelp()
 		{
 			ClearConsole();
 			BreakLine();
@@ -264,6 +265,8 @@ namespace Blinker
 			Console.WriteLine(" Write your name:");
 			BreakLine();
 			var name = Console.ReadLine();
+			if (name == String.Empty)
+				name = "PLAYER";
 			Player = new Player(name, _startingLocation);
 		}
 
