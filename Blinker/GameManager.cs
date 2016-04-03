@@ -82,6 +82,19 @@ namespace Blinker
 		private static void ShowDoSomethingMenu()
 		{
 			ClearConsole();
+			Console.WriteLine("\t\tWhat do you want to do?");
+			Console.WriteLine("1. Go somewhere\t\t\t7. Unequip item");
+			Console.WriteLine("2. Talk to someone\t\t8. Check location info");
+			Console.WriteLine("3. Attack someone\t\t9. Check who is here");
+			Console.WriteLine("4. Pick up item\t\t\t10. Check what items are there");
+			Console.WriteLine("5. Throw out item\t\t11. Check where can I go from here");
+			Console.WriteLine("6. Equip item\t\t\t12. Check my inventory");
+			Console.WriteLine("");
+		}
+
+		/*private static void ShowDoSomethingMenu()
+		{
+			ClearConsole();
 			Console.WriteLine("What do you want to do?");
 			Console.WriteLine("1. Go somewhere");
 			Console.WriteLine("2. Talk to someone");
@@ -95,7 +108,7 @@ namespace Blinker
 			Console.WriteLine("10. Check what items are there");
 			Console.WriteLine("11. Check where can I go from here");
 			Console.WriteLine("12. Check my inventory");
-		}
+		}*/
 
 		private static void DoSomething()
 		{
