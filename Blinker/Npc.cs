@@ -1,4 +1,6 @@
-﻿namespace Blinker
+﻿using System;
+
+namespace Blinker
 {
 	public class Npc : Creature, IMoveable
 	{
@@ -36,6 +38,18 @@
 		{
 			Writer.WriteAction(string.Format("> {0} tries to attack {1}.\n", Name, target.Name));
 			AttackTarget(target);
+		}
+
+		public new void EquipWeapon(PickupableItem weapon)
+		{
+			Writer.WriteAction(String.Format("> {0} is trying to equip a weapon.\n", Name));
+			base.EquipWeapon(weapon);
+		}
+
+		public new void UnequipWeapon(PickupableItem weapon)
+		{
+			Writer.WriteAction(string.Format("> {0} is trying to unequip a weapon.\n", Name));
+			base.UnequipWeapon(weapon);
 		}
 	}
 }

@@ -156,5 +156,17 @@ namespace Blinker
 			Writer.WriteAction("> You are trying to attack the target.\n");
 			AttackTarget(target);
 		}
+
+		public new void EquipWeapon(PickupableItem weapon)
+		{
+			Writer.WriteAction("> You are trying to equip a weapon.\n");
+			base.EquipWeapon(weapon);
+		}
+
+		public new void UnequipWeapon(PickupableItem weapon)
+		{
+			Writer.WriteAction("> You are trying to unequip a weapon.\n");
+			base.UnequipWeapon(weapon);
+		}
 	}
 }

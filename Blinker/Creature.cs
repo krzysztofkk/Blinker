@@ -82,7 +82,7 @@ namespace Blinker
 			}
 		}
 
-		public void EquipWeapon(PickupableItem weapon)
+		protected void EquipWeapon(PickupableItem weapon)
 		{
 			if (Items.Contains(weapon))
 			{
@@ -98,7 +98,7 @@ namespace Blinker
 			}
 		}
 
-		public void UnequipWeapon(PickupableItem weapon)
+		protected void UnequipWeapon(PickupableItem weapon)
 		{
 			if (EquipedWeapon == weapon)
 			{
