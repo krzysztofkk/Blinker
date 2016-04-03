@@ -7,6 +7,7 @@ namespace Blinker
 	{
 		static void Main(string[] args)
 		{
+			GameManager.Run();
 			GameManager.ShowMenu();
 
 			var room = new Location("Small Room", "tiny room with some people in there");
