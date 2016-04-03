@@ -53,11 +53,18 @@ namespace Blinker
 		private static void ShowMenu()
 		{
 			ClearConsole();
-			Console.WriteLine("1. Start new game");
-			Console.WriteLine("2. Load game");
-			Console.WriteLine("3. Display info");
-			Console.WriteLine("4. Exit");
+			BreakLine();
+			Console.WriteLine(" 1. Start new game");
+			Console.WriteLine(" 2. Load game");
+			Console.WriteLine(" 3. Display info");
+			Console.WriteLine(" 4. Exit");
+			BreakLine();
 			ChooseMenuOption();
+		}
+
+		private static void BreakLine()
+		{
+			Console.WriteLine("-------------------------------------------------------------------");
 		}
 
 		private static void ChooseMenuOption()
@@ -82,14 +89,15 @@ namespace Blinker
 		private static void ShowDoSomethingMenu()
 		{
 			ClearConsole();
+			BreakLine();
 			Console.WriteLine("\t\tWhat do you want to do?");
-			Console.WriteLine("1. Go somewhere\t\t\t7. Unequip item");
-			Console.WriteLine("2. Talk to someone\t\t8. Check location info");
-			Console.WriteLine("3. Attack someone\t\t9. Check who is here");
-			Console.WriteLine("4. Pick up item\t\t\t10. Check what items are there");
-			Console.WriteLine("5. Throw out item\t\t11. Check where can I go from here");
-			Console.WriteLine("6. Equip item\t\t\t12. Check my inventory");
-			Console.WriteLine("");
+			Console.WriteLine(" 1. Go somewhere\t\t7. Unequip item");
+			Console.WriteLine(" 2. Talk to someone\t\t8. Check location info");
+			Console.WriteLine(" 3. Attack someone\t\t9. Check who is here");
+			Console.WriteLine(" 4. Pick up item\t\t10. Check what items are there");
+			Console.WriteLine(" 5. Throw out item\t\t11. Check where can I go from here");
+			Console.WriteLine(" 6. Equip item\t\t\t12. Check my inventory");
+			BreakLine();
 		}
 
 		/*private static void ShowDoSomethingMenu()
@@ -125,6 +133,7 @@ namespace Blinker
 					var location = locations.Find(x => x.Name == parameter);
 					if (location != null)
 					{
+						ShowDoSomethingMenu();
 						Player.Move(location);
 						Console.ReadKey();
 					}
@@ -136,6 +145,7 @@ namespace Blinker
 					var npc = creatures.Find(x => x.Name == parameter);
 					if (npc != null)
 					{
+						ShowDoSomethingMenu();
 						Player.TalkTo((Npc)npc);
 						Console.ReadKey();
 					}
@@ -147,6 +157,7 @@ namespace Blinker
 					var creature = creatures.Find(x => x.Name == parameter);
 					if (creature != null)
 					{
+						ShowDoSomethingMenu();
 						Player.Attack(creature);
 						Console.ReadKey();
 					}
@@ -158,6 +169,7 @@ namespace Blinker
 					var pickedItem = items.Find(x => x.Name == parameter);
 					if (pickedItem != null)
 					{
+						ShowDoSomethingMenu();
 						Player.PickUpItem((PickupableItem)pickedItem);
 						Console.ReadKey();
 					}
@@ -169,6 +181,7 @@ namespace Blinker
 					var droppedItem = items.Find(x => x.Name == parameter);
 					if (droppedItem != null)
 					{
+						ShowDoSomethingMenu();
 						Player.ThrowOutItem((PickupableItem)droppedItem);
 						Console.ReadKey();
 					}
@@ -180,6 +193,7 @@ namespace Blinker
 					var equippedItem = items.Find(x => x.Name == parameter);
 					if (equippedItem != null)
 					{
+						ShowDoSomethingMenu();
 						Player.EquipWeapon(equippedItem);
 						Console.ReadKey();
 					}
@@ -190,6 +204,7 @@ namespace Blinker
 					var unequippedItem = items.Find(x => x.Name == parameter);
 					if (unequippedItem != null)
 					{
+						ShowDoSomethingMenu();
 						Player.UnequipWeapon(unequippedItem);
 						Console.ReadKey();
 					}
@@ -223,13 +238,14 @@ namespace Blinker
 		private static void DisplayInfo()
 		{
 			ClearConsole();
+			BreakLine();
 			Writer.WriteLog("# INFO:\n");
 			Writer.WriteInfo("Text");
 			Writer.WriteInfo(" - an information message (i.e room description)\n");
 			Writer.WriteAction("Text");
 			Writer.WriteInfo(" - commited action (i.e picked up item, moved to another location)\n");
 			Writer.WriteActionHostile("Text");
-			Writer.WriteInfo(" - hostile action (i. e fight)\n");
+			Writer.WriteInfo(" - hostile action (i.e fight)\n");
 			Writer.WriteDialog("Text");
 			Writer.WriteInfo(" - a dialog/npc\n");
 			Writer.WriteLocation("Text");
@@ -237,13 +253,16 @@ namespace Blinker
 			Writer.WriteItem("Text");
 			Writer.WriteInfo(" - an item (might be pickupable)\n");
 			Writer.WriteLog("# END INFO\n\n");
+			BreakLine();
 			Console.ReadKey();
 		}
 
 		private static void CreateNewPlayer()
 		{
 			ClearConsole();
-			Console.WriteLine("Write your name:");
+			BreakLine();
+			Console.WriteLine(" Write your name:");
+			BreakLine();
 			var name = Console.ReadLine();
 			Player = new Player(name, _startingLocation);
 		}
