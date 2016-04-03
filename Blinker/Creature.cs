@@ -5,7 +5,7 @@ namespace Blinker
 {
 	public abstract class Creature
 	{
-		static Random _random = new Random();
+		static readonly Random Random = new Random();
 		protected Creature(string name, Location location)
 		{
 			Name = name;
@@ -40,7 +40,7 @@ namespace Blinker
 				Health -= amount;
 				if (IsAlive())
 				{
-					var reaction = ReactionList[_random.Next(ReactionList.Count)];
+					var reaction = ReactionList[Random.Next(ReactionList.Count)];
 					Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, reaction));
 				}
 				if (!IsAlive())
@@ -58,7 +58,7 @@ namespace Blinker
 
 		protected int CalculateHit()
 		{
-			var rnd = _random.Next(-Strength/2, Strength/2);
+			var rnd = Random.Next(-Strength/2, Strength/2);
 			if (EquipedWeapon != null)
 				return Strength + EquipedWeapon.AttackValue + rnd;
 			return Strength + rnd;

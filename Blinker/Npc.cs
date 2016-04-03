@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Blinker
+﻿namespace Blinker
 {
 	public class Npc : Creature, IMoveable
 	{

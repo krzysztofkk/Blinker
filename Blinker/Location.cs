@@ -11,21 +11,11 @@ namespace Blinker
 		}
 
 		public List<Location> Exits = new List<Location>();
-		private List<Npc> _npcList = new List<Npc>();
-		private List<Item> _items = new List<Item>();
-		private List<PickupableItem> _pickupableItems = new List<PickupableItem>();
-		 
-		public List<Npc> NpcList
-		{
-			get { return _npcList; }
-			set { _npcList = value; }
-		}
+		public List<Item> Items { get; set; } = new List<Item>();
 
-		public List<PickupableItem> PickupableItemList
-		{
-			get { return _pickupableItems;}
-			set { _pickupableItems = value; }
-		} 
+		public List<Npc> NpcList { get; set; } = new List<Npc>();
+
+		public List<PickupableItem> PickupableItemList { get; set; } = new List<PickupableItem>();
 
 		public string Name { get; set; }
 		public string Description { get; set; }
