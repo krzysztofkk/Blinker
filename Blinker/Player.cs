@@ -20,8 +20,13 @@ namespace Blinker
 		public void CheckLocationExits()
 		{
 			Writer.WriteAction("> You are checking where you can go from here.\n");
-			foreach(var exit in CurrentLocation.Exits)
-				Writer.WriteLocation(exit.Name+", ");
+			var index = 0;
+			foreach (var exit in CurrentLocation.Exits)
+			{
+				if (index > 0) Writer.WriteInfo(", ");
+				Writer.WriteLocation(exit.Name);
+				index++;
+			}
 			Writer.WriteInfo("\n\n");
 		}
 
@@ -31,9 +36,14 @@ namespace Blinker
 			if (CurrentLocation.NpcList.Any())
 			{
 				Writer.WriteInfo("You see ");
+				var index = 0;
 				foreach (var npc in CurrentLocation.NpcList)
-					Writer.WriteDialog(npc.Name+", ");
-				Writer.WriteInfo("there.\n\n");
+				{
+					if (index > 0) Writer.WriteInfo(", ");
+					Writer.WriteDialog(npc.Name);
+					index++;
+				}
+				Writer.WriteInfo(" there.\n\n");
 			}
 			else
 			{
@@ -47,9 +57,14 @@ namespace Blinker
 			if (CurrentLocation.PickupableItemList.Any())
 			{
 				Writer.WriteInfo("You see ");
+				var index = 0;
 				foreach (var i in CurrentLocation.PickupableItemList)
-					Writer.WriteItem(i.Name+ ", ");
-				Writer.WriteInfo("there.\n\n");
+				{
+					if (index > 0) Writer.WriteInfo(", ");
+					Writer.WriteItem(i.Name);
+					index++;
+				}
+				Writer.WriteInfo(" there.\n\n");
 			}
 			else
 			{
@@ -60,8 +75,13 @@ namespace Blinker
 		public void CheckMyItems()
 		{
 			Writer.WriteAction("> You are checking your inventory. Available items:\n");
+			var index = 0;
 			foreach (var item in Items)
-				Writer.WriteItem(item.Name+", ");
+			{
+				if (index > 0) Writer.WriteInfo(", ");
+				Writer.WriteItem(item.Name);
+				index++;
+			}
 			Writer.WriteAction("\n\n");
 		}
 
