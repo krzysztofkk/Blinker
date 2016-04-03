@@ -181,12 +181,14 @@ namespace Blinker
 			Console.WriteLine("7. Unequip item");
 
 			var option = ReadOption();
-			Console.WriteLine("Type action target:");
-			var parameter = Console.ReadLine();
+			string parameter;
 
 			switch (option)
 			{
 				case 1:
+					player.CheckLocationExits();
+					Console.WriteLine("Where do you want to go?");
+					parameter = Console.ReadLine();
 					var location = locations.Find(x => x.Name == parameter);
 					if (location != null)
 					{
@@ -195,6 +197,9 @@ namespace Blinker
 					}
 					break;
 				case 2:
+					player.CheckWhoIsThere();
+					Console.WriteLine("Who do you want to talk to?");
+					parameter = Console.ReadLine();
 					var npc = creatures.Find(x => x.Name == parameter);
 					if (npc != null)
 					{
@@ -203,6 +208,9 @@ namespace Blinker
 					}
 					break;
 				case 3:
+					player.CheckWhoIsThere();
+					Console.WriteLine("Who do you want to attack?");
+					parameter = Console.ReadLine();
 					var creature = creatures.Find(x => x.Name == parameter);
 					if (creature != null)
 					{
@@ -211,6 +219,9 @@ namespace Blinker
 					}
 					break;
 				case 4:
+					player.CheckPickupableItemsThere();
+					Console.WriteLine("What do you want to pick up?");
+					parameter = Console.ReadLine();
 					var pickedItem = items.Find(x => x.Name == parameter);
 					if (pickedItem != null)
 					{
@@ -219,6 +230,9 @@ namespace Blinker
 					}
 					break;
 				case 5:
+					player.CheckMyItems();
+					Console.WriteLine("What do you want to drop?");
+					parameter = Console.ReadLine();
 					var droppedItem = items.Find(x => x.Name == parameter);
 					if (droppedItem != null)
 					{
@@ -227,6 +241,9 @@ namespace Blinker
 					}
 					break;
 				case 6:
+					player.CheckMyItems();
+					Console.WriteLine("What do you want to equip?");
+					parameter = Console.ReadLine();
 					var equippedItem = items.Find(x => x.Name == parameter);
 					if (equippedItem != null)
 					{
@@ -235,6 +252,8 @@ namespace Blinker
 					}
 					break;
 				case 7:
+					Console.WriteLine("What do you want to unequip?");
+					parameter = Console.ReadLine();
 					var unequippedItem = items.Find(x => x.Name == parameter);
 					if (unequippedItem != null)
 					{
