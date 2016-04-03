@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Blinker
 {
@@ -9,9 +10,9 @@ namespace Blinker
 		private static Location startingLocation;
 		private static bool gameStarted;
 
-		private static List<Location> locations;
-		private static List<Creature> creatures;
-		private static List<Item> items;   
+		private static List<Location> locations = new List<Location>();
+		private static List<Creature> creatures = new List<Creature>();
+		private static List<Item> items = new List<Item>();   
 
 		public static void Run()
 		{
@@ -22,11 +23,12 @@ namespace Blinker
 
 		}
 
-		public static void Init()
+		public static void Initialize()
 		{
 			var room = new Location("Small Room", "tiny room with some people in there");
 			var anotherRoom = new Location("Big room", "huge, cold room");
 			Initializer.ConnectLocations(room, anotherRoom);
+			startingLocation = room;
 
 			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", room);
 			var item2 = new PickupableItem("keys", "couple of keys on a keychain", room);
@@ -77,10 +79,10 @@ namespace Blinker
 		{
 			ClearConsole();
 			Console.WriteLine("\t\t# BLINKER #");
-			Console.WriteLine("\t1. Start new game");
-			Console.WriteLine("\t2. Load game");
-			Console.WriteLine("\t3. Display info");
-			Console.WriteLine("\t4. Exit");
+			Console.WriteLine("1. Start new game");
+			Console.WriteLine("2. Load game");
+			Console.WriteLine("3. Display info");
+			Console.WriteLine("4. Exit");
 			ChooseMenuOption();
 		}
 
@@ -106,6 +108,7 @@ namespace Blinker
 		public static void NewGame()
 		{
 			ClearConsole();
+			Initialize();
 			CreateNewPlayer();
 			gameStarted = true;
 		}
@@ -160,6 +163,9 @@ namespace Blinker
 					player.CheckMyItems();
 					Console.ReadKey();
 					break;
+				default:
+					Console.WriteLine("Wrong option");
+					break;
 			}
 		}
 
@@ -175,13 +181,48 @@ namespace Blinker
 			Console.WriteLine("6. Equip item");
 			Console.WriteLine("7. Unequip item");
 			var option = ReadOption();
-			Console.WriteLine("Type target:");
+			Console.WriteLine("Type action target:");
 			var parameter = Console.ReadLine();
 			switch (option)
 			{
-				//case 1:
-					//var taget = 
-					//player.Move(Location);
+				case 1:
+					var location = locations.Find(x => x.Name == parameter);
+					player.Move(location);
+					Console.ReadKey();
+					break;
+				case 2:
+					var npc = creatures.Find(x => x.Name == parameter);
+					player.TalkTo((Npc)npc);
+					Console.ReadKey();
+					break;
+				case 3:
+					var creature = creatures.Find(x => x.Name == parameter);
+					player.Attack(creature);
+					Console.ReadKey();
+					break;
+				case 4:
+					var pickedItem = items.Find(x => x.Name == parameter);
+					player.PickUpItem((PickupableItem)pickedItem);
+					Console.ReadKey();
+					break;
+				case 5:
+					var droppedItem = items.Find(x => x.Name == parameter);
+					player.ThrowOutItem((PickupableItem)droppedItem);
+					Console.ReadKey();
+					break;
+				case 6:
+					var equippedItem = items.Find(x => x.Name == parameter);
+					player.EquipWeapon((Weapon)equippedItem);
+					Console.ReadKey();
+					break;
+				case 7:
+					var unequippedItem = items.Find(x => x.Name == parameter);
+					player.UnequipWeapon((Weapon)unequippedItem);
+					Console.ReadKey();
+					break;
+				default:
+					Console.WriteLine("Wrong option");
+					break;
 			}
 		}
 
