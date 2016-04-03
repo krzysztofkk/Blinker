@@ -12,7 +12,7 @@ namespace Blinker
 			var anotherRoom = new Location("Big room", "huge, cold room");
 			Initializer.ConnectLocations(room, anotherRoom);
 
-			var player = new Player("Test", anotherRoom);
+			var player = new Player("PlayerName", anotherRoom);
 
 			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", player);
 			var item2 = new PickupableItem("keys", "couple of keys on a keychain", player);
@@ -59,8 +59,10 @@ namespace Blinker
 			player.Move(room);
 
 			player.Attack(john);
+			dave.Attack(john);
 			player.Attack(john);
 			player.Attack(john);
+			dave.Attack(john);
 
 			player.Attack(dave);
 

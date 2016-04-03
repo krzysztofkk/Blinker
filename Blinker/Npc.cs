@@ -33,5 +33,11 @@ namespace Blinker
 			CurrentLocation = targetLocation;
 			CurrentLocation.NpcList.Add(this);
 		}
+
+		public void Attack(Creature target)
+		{
+			Writer.WriteAction(string.Format("> {0} tries to attack {1}.\n", Name, target.Name));
+			AttackTarget(target);
+		}
 	}
 }
