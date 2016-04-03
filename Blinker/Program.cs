@@ -21,7 +21,6 @@ namespace Blinker
 			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", room);
 			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", player, 25);
 
-			player.EquipedWeapon = wpn1;
 
 			var john = new Npc("John", "I'm busy right now.", room);
 			john.ReactionList.AddMany("What the hell?", "Stop it!");
@@ -30,6 +29,8 @@ namespace Blinker
 
 
 			player.CheckMyItems();
+
+			player.EquipWeapon(wpn1);
 
 			player.CheckLocationInfo();
 			player.CheckLocationExits();
@@ -64,9 +65,12 @@ namespace Blinker
 			player.Attack(john);
 			dave.Attack(john);
 
+			player.UnequipWeapon(wpn1);
+
 			player.Attack(dave);
 
 			player.CheckWhoIsThere();
+
 
 
 

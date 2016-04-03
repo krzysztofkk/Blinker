@@ -26,7 +26,7 @@ namespace Blinker
 
 		public List<PickupableItem> Items { get; set; } = new List<PickupableItem>(); 
 
-		public Weapon EquipedWeapon { get; set; }
+		public Weapon EquipedWeapon { get; private set; }
 
 		public bool IsAlive()
 		{
@@ -79,6 +79,33 @@ namespace Blinker
 				else
 					Writer.WriteActionHostile("bare hands.\n");
 				target.ReceiveDamage(amount);
+			}
+		}
+
+		public void EquipWeapon(PickupableItem weapon)
+		{
+			if (Items.Contains(weapon))
+			{
+				if (weapon is Weapon)
+				{
+					if (EquipedWeapon != null)
+						UnequipWeapon(EquipedWeapon);
+					EquipedWeapon = (Weapon)weapon;
+					Writer.WriteDialog(String.Format("{0}", Name));
+					Writer.WriteInfo(" equips ");
+					Writer.WriteItem(string.Format("{0}\n\n", weapon.Name));
+				}
+			}
+		}
+
+		public void UnequipWeapon(PickupableItem weapon)
+		{
+			if (EquipedWeapon == weapon)
+			{
+				EquipedWeapon = null;
+				Writer.WriteDialog(string.Format("{0}", Name));
+				Writer.WriteInfo(" unequips ");
+				Writer.WriteItem(string.Format("{0}\n\n", weapon.Name));
 			}
 		}
 	}
