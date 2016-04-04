@@ -47,7 +47,11 @@ namespace Blinker
 		private static int ReadOption()
 		{
 			int option;
-			Int32.TryParse(Console.ReadLine(), out option);
+			ConsoleKeyInfo key = Console.ReadKey();
+			if (char.IsDigit(key.KeyChar))
+				option = int.Parse(key.KeyChar.ToString());
+			else
+				option = -1;
 			return option;
 		}
 
