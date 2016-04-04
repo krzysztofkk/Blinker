@@ -28,7 +28,13 @@ namespace Blinker
 		{
 			ClearConsole();
 			Console.ForegroundColor = ConsoleColor.White;
-			ExecuteAction();
+			ShowActionMenu();
+			while (true)
+			{
+				BreakLine();
+				ExecuteAction(ReadOption());
+			}
+
 		}
 
 		private static void StartNewGame()
@@ -44,14 +50,12 @@ namespace Blinker
 			Console.Clear();
 		}
 
-		private static int ReadOption()
+		private static char ReadOption()
 		{
-			int option;
-			ConsoleKeyInfo key = Console.ReadKey();
-			if (char.IsDigit(key.KeyChar))
-				option = int.Parse(key.KeyChar.ToString());
-			else
-				option = -1;
+			Console.Write("KEY: ");
+			char option = Console.ReadKey().KeyChar;
+			Console.WriteLine("");
+			option = char.ToUpper(option);
 			return option;
 		}
 
@@ -72,21 +76,30 @@ namespace Blinker
 			Console.WriteLine("-------------------------------------------------------------------");
 		}
 
+		private static void ShowError()
+		{
+			ShowActionMenu();
+			var colour = Console.ForegroundColor;
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine("\tWrong option!");
+			Console.ForegroundColor = colour;
+		}
+
 		private static void ExecuteMainMenuAction()
 		{
 			var option = ReadOption();
 			switch (option)
 			{
-				case 1:
+				case '1':
 					StartNewGame();
 					break;
-				case 2:
+				case '2':
 					ShowMainMenu();
 					break;
-				case 3:
+				case '3':
 					ShowHelp();
 					break;
-				case 4:
+				case '4':
 					break;
 			}
 		}
@@ -96,12 +109,14 @@ namespace Blinker
 			ClearConsole();
 			BreakLine();
 			Console.WriteLine("\t\tWhat do you want to do?");
-			Console.WriteLine(" 1. Go somewhere\t\t7. Unequip item");
-			Console.WriteLine(" 2. Talk to someone\t\t8. Check location info");
-			Console.WriteLine(" 3. Attack someone\t\t9. Check who is here");
-			Console.WriteLine(" 4. Pick up item\t\t10. Check what items are there");
-			Console.WriteLine(" 5. Throw out item\t\t11. Check where can I go from here");
-			Console.WriteLine(" 6. Equip item\t\t\t12. Check my inventory");
+			Console.WriteLine(" ## ACT ##\t\t\t## CHECK ##");
+			Console.WriteLine(" G. Go somewhere\t\t1. Check location info");
+			Console.WriteLine(" T. Talk to someone\t\t2. Check who is here");
+			Console.WriteLine(" A. Attack someone\t\t3. Check what items are there");
+			Console.WriteLine(" P. Pick up item\t\t4. Check where can I go from here");
+			Console.WriteLine(" T. Drop item\t\t\t5. Check my inventory");
+			Console.WriteLine(" E. Equip item\t\t\t");
+			Console.WriteLine(" U. Unequip item\t\t\t");
 			BreakLine();
 		}
 
@@ -123,15 +138,16 @@ namespace Blinker
 			Console.WriteLine("12. Check my inventory");
 		}*/
 
-		private static void ExecuteAction()
+		private static void ExecuteAction(char option)
 		{
-			ShowActionMenu();
-			var option = ReadOption();
+			//ShowActionMenu();
+			//var option = ReadOption();
 			string parameter;
 
 			switch (option)
 			{
-				case 1:
+				case 'G':
+					ShowActionMenu();
 					Player.CheckLocationExits();
 					Console.WriteLine("Where do you want to go?");
 					parameter = Console.ReadLine();
@@ -140,10 +156,12 @@ namespace Blinker
 					{
 						ShowActionMenu();
 						Player.MoveTo(location);
-						Console.ReadKey();
 					}
+					else
+						ShowError();
 					break;
-				case 2:
+				case 'T':
+					ShowActionMenu();
 					Player.CheckWhoIsThere();
 					Console.WriteLine("Who do you want to talk to?");
 					parameter = Console.ReadLine();
@@ -152,10 +170,12 @@ namespace Blinker
 					{
 						ShowActionMenu();
 						Player.TalkTo((Npc)npc);
-						Console.ReadKey();
 					}
+					else
+						ShowError();
 					break;
-				case 3:
+				case 'A':
+					ShowActionMenu();
 					Player.CheckWhoIsThere();
 					Console.WriteLine("Who do you want to attack?");
 					parameter = Console.ReadLine();
@@ -164,10 +184,11 @@ namespace Blinker
 					{
 						ShowActionMenu();
 						Player.Attack(creature);
-						Console.ReadKey();
 					}
+					else
+						ShowError();
 					break;
-				case 4:
+				case 'P':
 					Player.CheckPickupableItemsThere();
 					Console.WriteLine("What do you want to pick up?");
 					parameter = Console.ReadLine();
@@ -176,10 +197,11 @@ namespace Blinker
 					{
 						ShowActionMenu();
 						Player.PickUpItem((PickupableItem)pickedItem);
-						Console.ReadKey();
 					}
+					else
+						ShowError();
 					break;
-				case 5:
+				case 'D':
 					Player.CheckInventory();
 					Console.WriteLine("What do you want to drop?");
 					parameter = Console.ReadLine();
@@ -188,10 +210,11 @@ namespace Blinker
 					{
 						ShowActionMenu();
 						Player.ThrowOutItem((PickupableItem)droppedItem);
-						Console.ReadKey();
 					}
+					else
+						ShowError();
 					break;
-				case 6:
+				case 'E':
 					Player.CheckInventory();
 					Console.WriteLine("What do you want to equip?");
 					parameter = Console.ReadLine();
@@ -200,10 +223,11 @@ namespace Blinker
 					{
 						ShowActionMenu();
 						Player.EquipWeapon(equippedItem);
-						Console.ReadKey();
 					}
+					else
+						ShowError();
 					break;
-				case 7:
+				case 'U':
 					Console.WriteLine("What do you want to unequip?");
 					parameter = Console.ReadLine();
 					var unequippedItem = items.Find(x => x.Name == parameter);
@@ -211,31 +235,32 @@ namespace Blinker
 					{
 						ShowActionMenu();
 						Player.UnequipWeapon(unequippedItem);
-						Console.ReadKey();
 					}
+					else
+						ShowError();
 					break;
-				case 8:
+				case '1':
+					ShowActionMenu();
 					Player.CheckLocationInfo();
-					Console.ReadKey();
 					break;
-				case 9:
+				case '2':
+					ShowActionMenu();
 					Player.CheckWhoIsThere();
-					Console.ReadKey();
 					break;
-				case 10:
+				case '3':
+					ShowActionMenu();
 					Player.CheckPickupableItemsThere();
-					Console.ReadKey();
 					break;
-				case 11:
+				case '4':
+					ShowActionMenu();
 					Player.CheckLocationExits();
-					Console.ReadKey();
 					break;
-				case 12:
+				case '5':
+					ShowActionMenu();
 					Player.CheckInventory();
-					Console.ReadKey();
 					break;
 				default:
-					Console.WriteLine("Wrong option");
+					ShowError();
 					break;
 			}
 		}
