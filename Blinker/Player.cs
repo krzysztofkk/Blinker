@@ -13,7 +13,7 @@ namespace Blinker
 			Writer.WriteAction("> You are checking where you are.\n");
 			Writer.WriteInfo("I am in the ");
 			Writer.WriteLocation(string.Format("{0}\n", CurrentLocation.Name));
-			Writer.WriteInfo(string.Format("It's a {0}.\n\n", CurrentLocation.Description));
+			Writer.WriteInfo(string.Format("It's a {0}.\n", CurrentLocation.Description));
 		}
 
 		public void CheckLocationExits()
@@ -26,7 +26,7 @@ namespace Blinker
 				Writer.WriteLocation(exit.Name);
 				index++;
 			}
-			Writer.WriteInfo("\n\n");
+			Writer.WriteInfo("\n");
 		}
 
 		public void CheckWhoIsThere()
@@ -44,11 +44,11 @@ namespace Blinker
 						Writer.WriteInfo("(dead)");
 					index++;
 				}
-				Writer.WriteInfo(" there.\n\n");
+				Writer.WriteInfo(" there.\n");
 			}
 			else
 			{
-				Writer.WriteInfo("The room is empty.\n\n");
+				Writer.WriteInfo("The room is empty.\n");
 			}
 		}
 
@@ -65,11 +65,11 @@ namespace Blinker
 					Writer.WriteItem(i.Name);
 					index++;
 				}
-				Writer.WriteInfo(" there.\n\n");
+				Writer.WriteInfo(" there.\n");
 			}
 			else
 			{
-				Writer.WriteInfo("You don't see any pickupable items there.\n\n");
+				Writer.WriteInfo("You don't see any pickupable items there.\n");
 			}
 		}
 
@@ -83,7 +83,9 @@ namespace Blinker
 				Writer.WriteItem(item.Name);
 				index++;
 			}
-			Writer.WriteAction("\n\n");
+			if(Items.Count == 0)
+				Writer.WriteInfo("nothing");
+			Writer.WriteAction("\n");
 		}
 
 		public void MoveTo(Location targetLocation)
