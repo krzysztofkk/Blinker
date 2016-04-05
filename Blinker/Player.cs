@@ -168,7 +168,7 @@ namespace Blinker
 			}
 			else
 			{
-				Writer.WriteInfo("You don't have this item.\n\n");
+				Writer.WriteInfo("You don't have this item.\n");
 			}
 		}
 
@@ -181,7 +181,7 @@ namespace Blinker
 			}
 			else
 			{
-				Writer.WriteInfo("You don't have this item.\n\n");
+				Writer.WriteInfo("You don't have this item.\n");
 			}
 		}
 	}
