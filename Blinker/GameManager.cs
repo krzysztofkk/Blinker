@@ -81,8 +81,9 @@ namespace Blinker
 			ShowActionMenu();
 			var colour = Console.ForegroundColor;
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine("\tWrong option!");
+			Console.WriteLine("\t\t\tWrong option!");
 			Console.ForegroundColor = colour;
+			Console.WriteLine(" You pressed wrong key or typed not valid parameter.");
 		}
 
 		private static void ExecuteMainMenuAction()
@@ -114,7 +115,7 @@ namespace Blinker
 			Console.WriteLine(" T. Talk to someone\t\t2. Check who is here");
 			Console.WriteLine(" A. Attack someone\t\t3. Check what items are there");
 			Console.WriteLine(" P. Pick up item\t\t4. Check where can I go from here");
-			Console.WriteLine(" T. Drop item\t\t\t5. Check my inventory");
+			Console.WriteLine(" D. Drop item\t\t\t5. Check my inventory");
 			Console.WriteLine(" E. Equip item\t\t\t");
 			Console.WriteLine(" U. Unequip item\t\t\t");
 			BreakLine();
@@ -149,6 +150,7 @@ namespace Blinker
 				case 'G':
 					ShowActionMenu();
 					Player.CheckLocationExits();
+					BreakLine();
 					Console.WriteLine("Where do you want to go?");
 					parameter = Console.ReadLine();
 					var location = locations.Find(x => x.Name == parameter);
@@ -163,6 +165,7 @@ namespace Blinker
 				case 'T':
 					ShowActionMenu();
 					Player.CheckWhoIsThere();
+					BreakLine();
 					Console.WriteLine("Who do you want to talk to?");
 					parameter = Console.ReadLine();
 					var npc = creatures.Find(x => x.Name == parameter);
@@ -177,6 +180,7 @@ namespace Blinker
 				case 'A':
 					ShowActionMenu();
 					Player.CheckWhoIsThere();
+					BreakLine();
 					Console.WriteLine("Who do you want to attack?");
 					parameter = Console.ReadLine();
 					var creature = creatures.Find(x => x.Name == parameter);
@@ -189,7 +193,9 @@ namespace Blinker
 						ShowError();
 					break;
 				case 'P':
+					ShowActionMenu();
 					Player.CheckPickupableItemsThere();
+					BreakLine();
 					Console.WriteLine("What do you want to pick up?");
 					parameter = Console.ReadLine();
 					var pickedItem = items.Find(x => x.Name == parameter);
@@ -202,7 +208,9 @@ namespace Blinker
 						ShowError();
 					break;
 				case 'D':
+					ShowActionMenu();
 					Player.CheckInventory();
+					BreakLine();
 					Console.WriteLine("What do you want to drop?");
 					parameter = Console.ReadLine();
 					var droppedItem = items.Find(x => x.Name == parameter);
@@ -215,7 +223,9 @@ namespace Blinker
 						ShowError();
 					break;
 				case 'E':
+					ShowActionMenu();
 					Player.CheckInventory();
+					BreakLine();
 					Console.WriteLine("What do you want to equip?");
 					parameter = Console.ReadLine();
 					var equippedItem = items.Find(x => x.Name == parameter);
@@ -228,6 +238,9 @@ namespace Blinker
 						ShowError();
 					break;
 				case 'U':
+					ShowActionMenu();
+					Player.CheckInventory();
+					BreakLine();
 					Console.WriteLine("What do you want to unequip?");
 					parameter = Console.ReadLine();
 					var unequippedItem = items.Find(x => x.Name == parameter);
@@ -260,6 +273,7 @@ namespace Blinker
 					Player.CheckInventory();
 					break;
 				default:
+					ShowActionMenu();
 					ShowError();
 					break;
 			}
