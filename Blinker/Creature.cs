@@ -41,18 +41,18 @@ namespace Blinker
 				if (IsAlive())
 				{
 					var reaction = ReactionList[Random.Next(ReactionList.Count)];
-					Writer.WriteDialog(string.Format("{0}: {1}\n\n", Name, reaction));
+					Writer.WriteDialog(string.Format("{0}: {1}\n", Name, reaction));
 				}
 				if (!IsAlive())
 				{
 					Writer.WriteDialog(string.Format("{0}", Name));
-					Writer.WriteActionHostile(" has been killed.\n\n");
+					Writer.WriteActionHostile(" has been killed.\n");
 				}
 			}
 			else
 			{
 				Writer.WriteDialog(string.Format("{0}", Name));
-				Writer.WriteInfo(" is dead already.\n\n");
+				Writer.WriteInfo(" is dead already.\n");
 			}
 		}
 
