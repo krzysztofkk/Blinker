@@ -5,13 +5,13 @@ namespace Blinker
 {
 	public static class GameManager
 	{
-		public static Player Player;
+		private static Player _player;
 		private static Location _startingLocation;
 		private static bool _gameStarted;
 
-		private static List<Location> locations = new List<Location>();
-		private static List<Creature> creatures = new List<Creature>();
-		private static List<Item> items = new List<Item>();   
+		private static readonly List<Location> Locations = new List<Location>();
+		private static readonly List<Creature> Creatures = new List<Creature>();
+		private static readonly List<Item> Items = new List<Item>();   
 
 		public static void Run()
 		{
@@ -121,24 +121,6 @@ namespace Blinker
 			BreakLine();
 		}
 
-		/*private static void ShowActionMenu()
-		{
-			ClearConsole();
-			Console.WriteLine("What do you want to do?");
-			Console.WriteLine("1. Go somewhere");
-			Console.WriteLine("2. Talk to someone");
-			Console.WriteLine("3. Attack someone");
-			Console.WriteLine("4. Pick up item");
-			Console.WriteLine("5. Throw out item");
-			Console.WriteLine("6. Equip item");
-			Console.WriteLine("7. Unequip item");
-			Console.WriteLine("8. Check location info");
-			Console.WriteLine("9. Check who is here");
-			Console.WriteLine("10. Check what items are there");
-			Console.WriteLine("11. Check where can I go from here");
-			Console.WriteLine("12. Check my inventory");
-		}*/
-
 		private static void ExecuteAction(char option)
 		{
 			//ShowActionMenu();
@@ -149,128 +131,128 @@ namespace Blinker
 			{
 				case 'G':
 					ShowActionMenu();
-					Player.CheckLocationExits();
+					_player.CheckLocationExits();
 					BreakLine();
 					Console.WriteLine("Where do you want to go?");
 					parameter = Console.ReadLine();
-					var location = locations.Find(x => x.Name == parameter);
+					var location = Locations.Find(x => x.Name == parameter);
 					if (location != null)
 					{
 						ShowActionMenu();
-						Player.MoveTo(location);
+						_player.MoveTo(location);
 					}
 					else
 						ShowError();
 					break;
 				case 'T':
 					ShowActionMenu();
-					Player.CheckWhoIsThere();
+					_player.CheckWhoIsThere();
 					BreakLine();
 					Console.WriteLine("Who do you want to talk to?");
 					parameter = Console.ReadLine();
-					var npc = creatures.Find(x => x.Name == parameter);
+					var npc = Creatures.Find(x => x.Name == parameter);
 					if (npc != null)
 					{
 						ShowActionMenu();
-						Player.TalkTo((Npc)npc);
+						_player.TalkTo((Npc)npc);
 					}
 					else
 						ShowError();
 					break;
 				case 'A':
 					ShowActionMenu();
-					Player.CheckWhoIsThere();
+					_player.CheckWhoIsThere();
 					BreakLine();
 					Console.WriteLine("Who do you want to attack?");
 					parameter = Console.ReadLine();
-					var creature = creatures.Find(x => x.Name == parameter);
+					var creature = Creatures.Find(x => x.Name == parameter);
 					if (creature != null)
 					{
 						ShowActionMenu();
-						Player.Attack(creature);
+						_player.Attack(creature);
 					}
 					else
 						ShowError();
 					break;
 				case 'P':
 					ShowActionMenu();
-					Player.CheckPickupableItemsThere();
+					_player.CheckPickupableItemsThere();
 					BreakLine();
 					Console.WriteLine("What do you want to pick up?");
 					parameter = Console.ReadLine();
-					var pickedItem = items.Find(x => x.Name == parameter);
+					var pickedItem = Items.Find(x => x.Name == parameter);
 					if (pickedItem != null)
 					{
 						ShowActionMenu();
-						Player.PickUpItem((PickupableItem)pickedItem);
+						_player.PickUpItem((PickupableItem)pickedItem);
 					}
 					else
 						ShowError();
 					break;
 				case 'D':
 					ShowActionMenu();
-					Player.CheckInventory();
+					_player.CheckInventory();
 					BreakLine();
 					Console.WriteLine("What do you want to drop?");
 					parameter = Console.ReadLine();
-					var droppedItem = items.Find(x => x.Name == parameter);
+					var droppedItem = Items.Find(x => x.Name == parameter);
 					if (droppedItem != null)
 					{
 						ShowActionMenu();
-						Player.ThrowOutItem((PickupableItem)droppedItem);
+						_player.ThrowOutItem((PickupableItem)droppedItem);
 					}
 					else
 						ShowError();
 					break;
 				case 'E':
 					ShowActionMenu();
-					Player.CheckInventory();
+					_player.CheckInventory();
 					BreakLine();
 					Console.WriteLine("What do you want to equip?");
 					parameter = Console.ReadLine();
-					var equippedItem = items.Find(x => x.Name == parameter);
+					var equippedItem = Items.Find(x => x.Name == parameter);
 					if (equippedItem != null)
 					{
 						ShowActionMenu();
-						Player.EquipWeapon(equippedItem);
+						_player.EquipWeapon(equippedItem);
 					}
 					else
 						ShowError();
 					break;
 				case 'U':
 					ShowActionMenu();
-					Player.CheckInventory();
+					_player.CheckInventory();
 					BreakLine();
 					Console.WriteLine("What do you want to unequip?");
 					parameter = Console.ReadLine();
-					var unequippedItem = items.Find(x => x.Name == parameter);
+					var unequippedItem = Items.Find(x => x.Name == parameter);
 					if (unequippedItem != null)
 					{
 						ShowActionMenu();
-						Player.UnequipWeapon(unequippedItem);
+						_player.UnequipWeapon(unequippedItem);
 					}
 					else
 						ShowError();
 					break;
 				case '1':
 					ShowActionMenu();
-					Player.CheckLocationInfo();
+					_player.CheckLocationInfo();
 					break;
 				case '2':
 					ShowActionMenu();
-					Player.CheckWhoIsThere();
+					_player.CheckWhoIsThere();
 					break;
 				case '3':
 					ShowActionMenu();
-					Player.CheckPickupableItemsThere();
+					_player.CheckPickupableItemsThere();
 					break;
 				case '4':
 					ShowActionMenu();
-					Player.CheckLocationExits();
+					_player.CheckLocationExits();
 					break;
 				case '5':
 					ShowActionMenu();
-					Player.CheckInventory();
+					_player.CheckInventory();
 					break;
 				default:
 					ShowActionMenu();
@@ -310,7 +292,7 @@ namespace Blinker
 			var name = Console.ReadLine();
 			if (name == String.Empty)
 				name = "PLAYER";
-			Player = new Player(name, _startingLocation);
+			_player = new Player(name, _startingLocation);
 		}
 
 		//this might be used to load "story" from file in the future, right now it's a mess
@@ -352,7 +334,7 @@ namespace Blinker
 			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", anotherRoom, 7);
 
 			var john = new Npc("John", "I'm busy right now.", room);
-			john.ReactionList.AddMany("What the hell?", "Stop it!", "What are you doing man?", "Stop hitting me!");
+			john.ReactionList.AddMany("What the hell?", "Stop it!", "What are you doing?", "Stop hitting me!");
 
 			var dave = new Npc("Dave", "Hello! What do you need?", room);
 			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!", "That hurts!");
@@ -363,21 +345,21 @@ namespace Blinker
 			var janitor = new Npc("Janitor", "I am a janitor.", storageRoom);
 			janitor.ReactionList.AddMany("Ouch, that hurts!", "Please, stop it.", "Why are you doing that?");
 
-			locations.AddMany(
+			Locations.AddMany(
 				room,
 				anotherRoom,
 				garden,
 				storageRoom
 				);
 
-			creatures.AddMany(
+			Creatures.AddMany(
 				john,
 				dave,
 				andrew,
 				janitor
 				);
 
-			items.AddMany(
+			Items.AddMany(
 				item1,
 				item2,
 				item3,
