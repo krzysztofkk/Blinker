@@ -329,11 +329,11 @@ namespace Blinker
 			var playground = new Location("playground", "abandoned children playground");
 
 			//villa
-			var houseHall = new Location("house", "house hall with some hangers and a big mirror on the wall");
+			var houseHall = new Location("house entrance", "house hall with some hangers and a big mirror on the wall");
 			var houseGarage = new Location("garage", "empty garage with intensive petrol smell");
 			var houseLivingRoom = new Location("living room", "living room with coffe table, sofa and tv hanged on the wall");
 			var houseKitchen = new Location("kitchen", "old style kitchen with wooden furniture");
-			var houseToilet = new Location("toiler", "small toilet with tiny bathhub");
+			var houseToilet = new Location("toilet", "small toilet with tiny bathhub");
 			var houseBackyard = new Location("backyard", "huge, neglected garden, full of ferns and apple trees");
 			var houseAlcove = new Location("alcove", "wooden alcove with gardening tools");
 
@@ -408,6 +408,10 @@ namespace Blinker
 			var john = new Npc("John", "Give me a rest, I'm tired.", houseBackyard);
 			john.ReactionList.AddMany("Stop it now!", "Dude...", "Argh!");
 
+			var stranger = new Npc("Stranger", "...", playground);
+
+			var groceryClient = new Npc("Client", "I'm talking with right now, please wait.", groceryShop);
+
 			Locations.AddMany(
 				northStreet,
 				junction,
@@ -431,7 +435,9 @@ namespace Blinker
 				john,
 				cutthroat,
 				hooker,
-				janitor
+				janitor,
+				stranger,
+				groceryClient
 				);
 
 			Items.AddMany(

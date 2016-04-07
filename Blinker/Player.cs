@@ -31,7 +31,7 @@ namespace Blinker
 
 		public void CheckWhoIsThere()
 		{
-			Writer.WriteAction("> You take a quick look at the room.\n");
+			Writer.WriteAction("> You take a quick look.\n");
 			if (CurrentLocation.NpcList.Any())
 			{
 				Writer.WriteInfo("You see ");
@@ -48,7 +48,7 @@ namespace Blinker
 			}
 			else
 			{
-				Writer.WriteInfo("The room is empty.\n");
+				Writer.WriteInfo("The location is empty.\n");
 			}
 		}
 
