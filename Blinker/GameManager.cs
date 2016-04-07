@@ -34,7 +34,7 @@ namespace Blinker
 				BreakLine();
 				ExecuteAction(ReadOption());
 			}
-
+			// ReSharper disable once FunctionNeverReturns
 		}
 
 		private static void StartNewGame()
@@ -313,62 +313,131 @@ namespace Blinker
 			//2. remember to set _startingLocation
 			//## END MANUAL ##
 
-			var room = new Location("small room", "tiny room with some people in there");
-			var storageRoom = new Location("storage room", "storage room with some brooms");
-			var anotherRoom = new Location("big room", "huge, cold room");
-			var garden = new Location("garden", "green, grassy garden with one big tree in the centre");
-			ConnectLocations(room, storageRoom);
-			ConnectLocations(room, anotherRoom);
-			ConnectLocations(anotherRoom, garden);
+			//LOCATIONS
 
-			_startingLocation = room;
+			//roads
+			var junction = new Location("junction", "junction where north street, south street and east street cross");
+			var northStreet = new Location("north street", "calm, wide street");
+			var southStreet = new Location("south street", "calm, wide street");
+			var eastStreet = new Location("east street", "quiet, narrow street");
 
-			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", garden);
-			var item2 = new PickupableItem("keys", "couple of keys on a keychain", room);
-			var item3 = new PickupableItem("stone", "tiny, gray stone", room);
-			var item4 = new PickupableItem("empty bottle", "empty irish beer bottle", room);
-			var item5 = new PickupableItem("wooden plank", "long, sharp wooden plank", garden);
-			var item6 = new PickupableItem("long broom", "long, old broom", storageRoom);
-			var item7 = new PickupableItem("small broom", "short, brown broom", storageRoom);
-			var wpn1 = new Weapon("knife", "sharp knife with wooden handle", room, 25);
-			var wpn2 = new Weapon("baseball bat", "used, old baseball bat", anotherRoom, 7);
+			//grocery shop
+			var groceryShop = new Location("grocery shop", "big grocery shop with shelves full of fruit and vegetables");
+			var groceryShopBackOffice = new Location("back office", "small back office with some boxes");
 
-			var john = new Npc("John", "I'm busy right now.", room);
-			john.ReactionList.AddMany("What the hell?", "Stop it!", "What are you doing?", "Stop hitting me!");
+			//playground
+			var playground = new Location("playground", "abandoned children playground");
 
-			var dave = new Npc("Dave", "Hello! What do you need?", room);
+			//villa
+			var houseHall = new Location("house", "house hall with some hangers and a big mirror on the wall");
+			var houseGarage = new Location("garage", "empty garage with intensive petrol smell");
+			var houseLivingRoom = new Location("living room", "living room with coffe table, sofa and tv hanged on the wall");
+			var houseKitchen = new Location("kitchen", "old style kitchen with wooden furniture");
+			var houseToilet = new Location("toiler", "small toilet with tiny bathhub");
+			var houseBackyard = new Location("backyard", "huge, neglected garden, full of ferns and apple trees");
+			var houseAlcove = new Location("alcove", "wooden alcove with gardening tools");
+
+			//CONNECTIONS
+			ConnectLocations(junction, northStreet);
+			ConnectLocations(junction, southStreet);
+			ConnectLocations(junction, eastStreet);
+
+			ConnectLocations(groceryShop, groceryShopBackOffice);
+
+			ConnectLocations(houseHall, houseGarage);
+			ConnectLocations(houseHall, houseLivingRoom);
+			ConnectLocations(houseHall, houseBackyard);
+			ConnectLocations(houseLivingRoom, houseKitchen);
+			ConnectLocations(houseLivingRoom, houseToilet);
+			ConnectLocations(houseBackyard, houseAlcove);
+
+			ConnectLocations(northStreet, groceryShop);
+			ConnectLocations(eastStreet, groceryShop);
+			ConnectLocations(eastStreet, playground);
+			ConnectLocations(eastStreet, houseHall);
+			ConnectLocations(southStreet, houseBackyard);
+
+			_startingLocation = junction;
+
+			//ITEMS
+
+			var item1 = new PickupableItem("wallet", "leather wallet, almost empty", northStreet);
+			var item2 = new PickupableItem("keys", "couple of keys on a keychain", northStreet);
+			var item3 = new PickupableItem("foil bag", "transparent, yellow foil bag", junction);
+			var item4 = new PickupableItem("stub", "cigarette stub", southStreet);
+			var item5 = new PickupableItem("apple", "fresh, green apple", groceryShop);
+			var item6 = new PickupableItem("banana", "slightly brown banana", groceryShop);
+			var item7 = new PickupableItem("tomato", "blood-red tomato", groceryShop);
+			var item8 = new PickupableItem("lime", "fresh lime", groceryShop);
+			var item9 = new PickupableItem("doll", "very old, destroyed doll", playground);
+			var item10 = new PickupableItem("coat", "slightly worn, brown leather coat", houseHall);
+			var item11 = new Weapon("umbrella", "a yellow umbrella with steel tip", houseHall, 2);
+			var item12 = new PickupableItem("sneakers", "sport sneakers", houseHall);
+			var item13 = new PickupableItem("bowl", "ceramic bowl", houseLivingRoom);
+			var item14 = new PickupableItem("newspaper", "black and white newspaper", houseLivingRoom);
+			var item15 = new PickupableItem("watch", "expensive silver watch", houseLivingRoom);
+			var item16 = new PickupableItem("book", "thick adventure book with blue cover", houseLivingRoom);
+			var item17 = new Weapon("butcher knife", "a big, heavy butcher knife", houseKitchen, 25);
+			var item18 = new PickupableItem("milk", "carton of milk", houseKitchen);
+			var item19 = new PickupableItem("toilet paper", "a roll of toilet paper", houseToilet);
+			var item20 = new PickupableItem("toothbrush", "used, blue toothbrush");
+			var item21 = new PickupableItem("stone", "tiny, gray stone", houseBackyard);
+			var item22 = new PickupableItem("empty bottle", "empty irish beer bottle", houseBackyard);
+			var item23 = new Weapon("baseball bat", "wooden bat used in baseball", houseBackyard, 12);
+			var item24 = new PickupableItem("wooden plank", "long, sharp wooden plank", houseAlcove);
+			var item25 = new Weapon("long broom", "long, old broom", houseAlcove, 3);
+			var item26 = new Weapon("small broom", "short, brown broom", houseAlcove, 2);
+			var item27 = new Weapon("wrench", "steel wrench", houseGarage, 4);
+
+			//NPCS
+
+			var shopkeeper = new Npc("Shopkeeper", "Welcome in my store! Sorry but I'm busy right now.", groceryShop);
+			shopkeeper.ReactionList.AddMany("What the hell?", "Stop it!", "What are you doing?", "Stop hitting me!");
+
+			var dave = new Npc("Dave", "Hello! What do you need?", eastStreet);
 			dave.ReactionList.AddMany("Ugh!", "Argh...", "Ouch!", "That hurts!");
 
-			var andrew = new Npc("Andrew", "Go away.", garden);
-			andrew.ReactionList.AddMany("...");
+			var cutthroat = new Npc("Cutthroat", "Go away. Now.", southStreet);
 
-			var janitor = new Npc("Janitor", "I am a janitor.", storageRoom);
+			var hooker = new Npc("Hooker", "Oh hello. I can't talk with at the moment, come back later.", southStreet);
+			hooker.ReactionList.AddMany("Please stop!", "Don't kill me!", "Why?");
+
+			var janitor = new Npc("Janitor", "I am a janitor. I'm busy.", houseAlcove);
 			janitor.ReactionList.AddMany("Ouch, that hurts!", "Please, stop it.", "Why are you doing that?");
 
+			var john = new Npc("John", "Give me a rest, I'm tired.", houseBackyard);
+			john.ReactionList.AddMany("Stop it now!", "Dude...", "Argh!");
+
 			Locations.AddMany(
-				room,
-				anotherRoom,
-				garden,
-				storageRoom
+				northStreet,
+				junction,
+				southStreet,
+				eastStreet,
+				groceryShop,
+				groceryShopBackOffice,
+				playground,
+				houseHall,
+				houseGarage,
+				houseLivingRoom,
+				houseKitchen,
+				houseToilet,
+				houseBackyard,
+				houseAlcove
 				);
 
 			Creatures.AddMany(
-				john,
+				shopkeeper,
 				dave,
-				andrew,
+				john,
+				cutthroat,
+				hooker,
 				janitor
 				);
 
 			Items.AddMany(
-				item1,
-				item2,
-				item3,
-				item4,
-				item5,
-				item6,
-				item7,
-				wpn1,
-				wpn2
+				item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11,
+				item12, item13, item14, item15, item16, item17, item18, item19, item20, item21,
+				item22, item23, item24, item25, item26, item27
 				);
 		}
 
