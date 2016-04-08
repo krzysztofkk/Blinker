@@ -5,7 +5,7 @@ namespace Blinker.Entity
 {
 	public class Player : Creature, IMoveable
 	{
-		private List<Objective> _objectives = new List<Objective>(); 
+		private List<Objective> _objectiveList = new List<Objective>(); 
 
 		public Player(string name, Location location) : base(name, location)
 		{
@@ -101,6 +101,20 @@ namespace Blinker.Entity
 				var weapon = item as Weapon;
 				Writer.WriteInfo("It has "+weapon.AttackValue+" attack points.\n");
 			}
+		}
+
+		public void CheckObjectiveList()
+		{
+			Writer.WriteAction("> You check your objectives.\n");
+			var index = 0;
+			foreach (var i in _objectiveList)
+			{
+				if (index > 0) Writer.WriteInfo(", ");
+				Writer.WriteInfo(i.Name);
+				index++;
+			}
+			Writer.WriteInfo("\n");
+
 		}
 
 		public void MoveTo(Location targetLocation)

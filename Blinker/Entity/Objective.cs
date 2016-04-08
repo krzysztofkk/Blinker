@@ -1,4 +1,4 @@
-namespace Blinker
+namespace Blinker.Entity
 {
 	public class Objective
 	{
@@ -8,7 +8,7 @@ namespace Blinker
 		public ObjectiveType Type;
 		public bool IsCompleted;
 
-		public Objective(string name, string description, ObjectiveType type, bool isCompleted)
+		public Objective(string name, string description, ObjectiveType type)
 		{
 			Name = name;
 			Description = description;

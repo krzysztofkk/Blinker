@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Blinker.Entity;
 
 namespace Blinker
 {
@@ -11,7 +12,8 @@ namespace Blinker
 
 		private static readonly List<Location> Locations = new List<Location>();
 		private static readonly List<Creature> Creatures = new List<Creature>();
-		private static readonly List<Item> Items = new List<Item>();   
+		private static readonly List<Item> Items = new List<Item>();  
+		private static readonly List<Objective> Objectives = new List<Objective>(); 
 
 		public static void Run()
 		{
@@ -427,6 +429,9 @@ namespace Blinker
 
 			var groceryClient = new Npc("Client", "I'm talking with right now, please wait.", groceryShop);
 
+			//OBJECTIVES
+			var getKnife = new Objective("get butcher knife", "search the area for butcher knife", ObjectiveType.Have);
+
 			Locations.AddMany(
 				northStreet,
 				junction,
@@ -459,6 +464,10 @@ namespace Blinker
 				item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11,
 				item12, item13, item14, item15, item16, item17, item18, item19, item20, item21,
 				item22, item23, item24, item25, item26, item27
+				);
+
+			Objectives.AddMany(
+				getKnife
 				);
 		}
 
