@@ -329,8 +329,10 @@ namespace Blinker
 			//3. NPC (or creature)
 			//npc schema: Npc(name, greeting, location)
 			//adding attack reactions: person.ReactionList.Addmany(string, string, string, ...)
+			//4 OBJECTIVE
+			//objective schema: Objectiove(name, description, ObjectiveType.type)
 			//PART II
-			//1. add your locations, items and npcs to lists (locations, creatures, items)
+			//1. add your locations, items, npcs and objectives to lists (locations, creatures, items, objectives)
 			//2. remember to set _startingLocation
 			//## END MANUAL ##
 
@@ -435,6 +437,7 @@ namespace Blinker
 
 			//OBJECTIVES
 			var getKnife = new Objective("get butcher knife", "search the area for butcher knife", ObjectiveType.Have);
+			var killCutthroat = new Objective("kill Cutthroat", "find and kill Cutthroat", ObjectiveType.Kill);
 
 
 			// ## LISTS ##
@@ -474,7 +477,8 @@ namespace Blinker
 				);
 
 			Objectives.AddMany(
-				getKnife
+				getKnife,
+				killCutthroat
 				);
 		}
 
