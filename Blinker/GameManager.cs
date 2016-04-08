@@ -119,7 +119,7 @@ namespace Blinker
 			Console.WriteLine(" P. Pick up item\t\t4. Where can I go from here");
 			Console.WriteLine(" D. Drop item\t\t\t5. My inventory");
 			Console.WriteLine(" E. Equip item\t\t\t6. Inspect item");
-			Console.WriteLine(" U. Unequip item\t\t\t");
+			Console.WriteLine(" U. Unequip item\t\t7. Tasks to do");
 			BreakLine();
 		}
 
@@ -271,6 +271,10 @@ namespace Blinker
 					else
 						ShowError();
 					break;
+				case '7':
+					ShowActionMenu();
+					_player.CheckObjectiveList();
+					break;
 				default:
 					ShowActionMenu();
 					ShowError();
@@ -309,7 +313,7 @@ namespace Blinker
 			var name = Console.ReadLine();
 			if (name == String.Empty)
 				name = "PLAYER";
-			_player = new Player(name, _startingLocation);
+			_player = new Player(name, _startingLocation, Objectives);
 		}
 
 		//this might be used to load "story" from file in the future, right now it's a mess
@@ -431,6 +435,9 @@ namespace Blinker
 
 			//OBJECTIVES
 			var getKnife = new Objective("get butcher knife", "search the area for butcher knife", ObjectiveType.Have);
+
+
+			// ## LISTS ##
 
 			Locations.AddMany(
 				northStreet,

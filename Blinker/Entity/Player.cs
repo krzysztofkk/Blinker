@@ -5,10 +5,11 @@ namespace Blinker.Entity
 {
 	public class Player : Creature, IMoveable
 	{
-		private List<Objective> _objectiveList = new List<Objective>(); 
+		private List<Objective> _objectiveList;  
 
-		public Player(string name, Location location) : base(name, location)
+		public Player(string name, Location location, List<Objective> objectiveList) : base(name, location)
 		{
+			_objectiveList = objectiveList;
 		}
 
 		public void CheckLocationInfo()
@@ -109,9 +110,12 @@ namespace Blinker.Entity
 			var index = 0;
 			foreach (var i in _objectiveList)
 			{
-				if (index > 0) Writer.WriteInfo(", ");
-				Writer.WriteInfo(i.Name);
-				index++;
+				if (!i.IsCompleted)
+				{
+					if (index > 0) Writer.WriteInfo("\n");
+					Writer.WriteInfo((index + 1) + ". " + i.Name);
+					index++;
+				}
 			}
 			Writer.WriteInfo("\n");
 

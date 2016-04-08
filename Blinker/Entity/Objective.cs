@@ -2,7 +2,7 @@ namespace Blinker.Entity
 {
 	public class Objective
 	{
-		private int _id;
+		//private int _id;
 		public string Name;
 		public string Description;
 		public ObjectiveType Type;
