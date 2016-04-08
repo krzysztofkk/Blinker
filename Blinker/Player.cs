@@ -88,6 +88,18 @@ namespace Blinker
 			Writer.WriteAction("\n");
 		}
 
+		public void CheckItemDetails(Item item)
+		{
+			Writer.WriteAction("> You take a look at ");
+			Writer.WriteItem(item.Name+"\n");
+			Writer.WriteInfo("It's "+item.Description+".\n");
+			if (item is Weapon)
+			{
+				var weapon = item as Weapon;
+				Writer.WriteInfo("It has "+weapon.AttackValue+" attack points.\n");
+			}
+		}
+
 		public void MoveTo(Location targetLocation)
 		{
 			if (targetLocation != CurrentLocation)
