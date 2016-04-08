@@ -45,13 +45,13 @@ namespace Blinker
 				}
 				if (!IsAlive())
 				{
-					Writer.WriteDialog(string.Format("{0}", Name));
+					Writer.WriteDialog(Name);
 					Writer.WriteActionHostile(" has been killed.\n");
 				}
 			}
 			else
 			{
-				Writer.WriteDialog(string.Format("{0}", Name));
+				Writer.WriteDialog(Name);
 				Writer.WriteInfo(" is dead already.\n");
 			}
 		}
@@ -70,9 +70,9 @@ namespace Blinker
 			if (IsAlive())
 			{
 				Writer.WriteActionHostile("Target ");
-				Writer.WriteDialog(string.Format("{0}", target.Name));
-				Writer.WriteActionHostile(string.Format(" suffers {0} damage from ", amount));
-				Writer.WriteDialog(string.Format("{0}", Name));
+				Writer.WriteDialog(target.Name);
+				Writer.WriteActionHostile(" suffers "+amount+" damage from ");
+				Writer.WriteDialog(Name);
 				Writer.WriteActionHostile("'s attack with ");
 				if(EquipedWeapon != null)
 					Writer.WriteItem(EquipedWeapon.Name+".\n");
@@ -91,9 +91,9 @@ namespace Blinker
 					if (EquipedWeapon != null)
 						UnequipWeapon(EquipedWeapon);
 					EquipedWeapon = (Weapon)weapon;
-					Writer.WriteDialog(String.Format("{0}", Name));
+					Writer.WriteDialog(Name);
 					Writer.WriteInfo(" equips ");
-					Writer.WriteItem(string.Format("{0}\n\n", weapon.Name));
+					Writer.WriteItem(weapon.Name+"\n\n");
 				}
 				else
 				{
@@ -107,9 +107,9 @@ namespace Blinker
 			if (EquipedWeapon == weapon)
 			{
 				EquipedWeapon = null;
-				Writer.WriteDialog(string.Format("{0}", Name));
+				Writer.WriteDialog(Name);
 				Writer.WriteInfo(" unequips ");
-				Writer.WriteItem(string.Format("{0}\n\n", weapon.Name));
+				Writer.WriteItem(weapon.Name+"\n\n");
 			}
 		}
 	}

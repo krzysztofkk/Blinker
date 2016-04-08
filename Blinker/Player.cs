@@ -12,8 +12,8 @@ namespace Blinker
 		{
 			Writer.WriteAction("> You are checking where you are.\n");
 			Writer.WriteInfo("I am in the ");
-			Writer.WriteLocation(string.Format("{0}\n", CurrentLocation.Name));
-			Writer.WriteInfo(string.Format("It's a {0}.\n", CurrentLocation.Description));
+			Writer.WriteLocation(CurrentLocation.Name+"\n"));
+			Writer.WriteInfo("It's a "+CurrentLocation.Description+".\n");
 		}
 
 		public void CheckLocationExits()
@@ -107,9 +107,9 @@ namespace Blinker
 				if (CurrentLocation.Exits.Contains(targetLocation))
 				{
 					Writer.WriteAction("> You are moving from ");
-					Writer.WriteLocation(string.Format("{0}", CurrentLocation.Name));
+					Writer.WriteLocation(CurrentLocation.Name);
 					Writer.WriteAction(" to ");
-					Writer.WriteLocation(string.Format("{0}\n\n", targetLocation.Name));
+					Writer.WriteLocation(targetLocation.Name+"\n\n");
 					CurrentLocation = targetLocation;
 				}
 				else
@@ -123,28 +123,28 @@ namespace Blinker
 			}
 		}
 
-		public void TalkTo(Npc someone)
+		public void TalkTo(Npc npc)
 		{
-			if (CurrentLocation.NpcList.Contains(someone))
+			if (CurrentLocation.NpcList.Contains(npc))
 			{
-				if (someone.IsAlive())
+				if (npc.IsAlive())
 				{
-					Writer.WriteAction(string.Format("> You talk to {0}.\n", someone.Name));
-					someone.Greet();
+					Writer.WriteAction("> You talk to "+npc.Name+".\n");
+					npc.Greet();
 				}
 				else
 				{
 					Writer.WriteAction("> Cannot talk. ");
-					Writer.WriteDialog(string.Format("{0}", someone.Name));
+					Writer.WriteDialog(npc.Name);
 					Writer.WriteAction(" is dead.\n\n");
 				}
 			}
 			else
 			{
 				Writer.WriteAction("> Cannot talk. ");
-				Writer.WriteDialog(string.Format("{0}", someone.Name));
+				Writer.WriteDialog(npc.Name);
 				Writer.WriteAction(" is not in ");
-				Writer.WriteInfo(string.Format("{0}\n\n", CurrentLocation.Name));
+				Writer.WriteInfo(CurrentLocation.Name+"\n\n");
 
 			}
 		}
@@ -152,7 +152,7 @@ namespace Blinker
 		public void PickUpItem(PickupableItem item)
 		{
 			Writer.WriteAction("> You picked up ");
-			Writer.WriteItem(string.Format("{0}\n\n", item.Name));
+			Writer.WriteItem(item.Name+"\n\n");
 			CurrentLocation.PickupableItemList.Remove(item);
 			Items.Add(item);
 		}

@@ -55,7 +55,7 @@ namespace Blinker
 
 		public new void UnequipWeapon(Item weapon)
 		{
-			Writer.WriteAction(string.Format("> {0} is trying to unequip a weapon.\n", Name));
+			Writer.WriteAction("> "+Name+" is trying to unequip a weapon.\n");
 			if (Items.Contains((PickupableItem)weapon))
 			{
 				base.UnequipWeapon(weapon);
