@@ -111,12 +111,12 @@ namespace Blinker
 			BreakLine();
 			Console.WriteLine("\t\tWhat do you want to do?");
 			Console.WriteLine(" ## ACT ##\t\t\t## CHECK ##");
-			Console.WriteLine(" G. Go somewhere\t\t1. Check location info");
-			Console.WriteLine(" T. Talk to someone\t\t2. Check who is here");
-			Console.WriteLine(" A. Attack someone\t\t3. Check what items are there");
-			Console.WriteLine(" P. Pick up item\t\t4. Check where can I go from here");
-			Console.WriteLine(" D. Drop item\t\t\t5. Check my inventory");
-			Console.WriteLine(" E. Equip item\t\t\t");
+			Console.WriteLine(" G. Go somewhere\t\t1. Location info");
+			Console.WriteLine(" T. Talk to someone\t\t2. Who is here");
+			Console.WriteLine(" A. Attack someone\t\t3. What items are there");
+			Console.WriteLine(" P. Pick up item\t\t4. Where can I go from here");
+			Console.WriteLine(" D. Drop item\t\t\t5. My inventory");
+			Console.WriteLine(" E. Equip item\t\t\t6. Inspect item");
 			Console.WriteLine(" U. Unequip item\t\t\t");
 			BreakLine();
 		}
@@ -253,6 +253,21 @@ namespace Blinker
 				case '5':
 					ShowActionMenu();
 					_player.CheckInventory();
+					break;
+				case '6':
+					ShowActionMenu();
+					_player.CheckInventory();
+					BreakLine();
+					Console.WriteLine("What do you want to inspect?");
+					parameter = Console.ReadLine();
+					var selectedItem = Items.Find(x => x.Name == parameter);
+					if (selectedItem != null)
+					{
+						ShowActionMenu();
+						_player.CheckItemDetails(selectedItem);
+					}
+					else
+						ShowError();
 					break;
 				default:
 					ShowActionMenu();
