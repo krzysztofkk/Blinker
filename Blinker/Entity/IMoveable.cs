@@ -1,4 +1,4 @@
-﻿namespace Blinker
+﻿namespace Blinker.Entity
 {
 	public interface IMoveable
 	{

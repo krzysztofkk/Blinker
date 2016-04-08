@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blinker
+namespace Blinker.Entity
 {
 	public class Npc : Creature, IMoveable
 	{

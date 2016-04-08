@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Blinker
+namespace Blinker.Entity
 {
 	public class Location
 	{

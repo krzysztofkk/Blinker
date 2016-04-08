@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using System.Linq;
 
-namespace Blinker
+namespace Blinker.Entity
 {
 	public class Player : Creature, IMoveable
 	{
+		private List<Objective> _objectives = new List<Objective>(); 
+
 		public Player(string name, Location location) : base(name, location)
 		{
 		}
@@ -12,7 +15,7 @@ namespace Blinker
 		{
 			Writer.WriteAction("> You are checking where you are.\n");
 			Writer.WriteInfo("I am in the ");
-			Writer.WriteLocation(CurrentLocation.Name+"\n"));
+			Writer.WriteLocation(CurrentLocation.Name+"\n");
 			Writer.WriteInfo("It's a "+CurrentLocation.Description+".\n");
 		}
 

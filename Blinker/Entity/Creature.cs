@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Blinker
+namespace Blinker.Entity
 {
 	public abstract class Creature
 	{
