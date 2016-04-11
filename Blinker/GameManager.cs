@@ -144,8 +144,8 @@ namespace Blinker
 					_player.CheckLocationExits();
 					BreakLine();
 					Console.WriteLine("Where do you want to go?");
-					parameter = ReadParameter();
-					var location = _locations.Find(x => x.Name.ToLower() == parameter);
+					//parameter = ReadParameter();
+					var location = _locations.Find(x => x.Name.ToLower() == ReadParameter());
 					if (location != null)
 					{
 						ShowActionMenu();
