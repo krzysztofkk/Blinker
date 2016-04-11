@@ -4,18 +4,18 @@ using Blinker.Entity;
 
 namespace Blinker
 {
-	public static class GameManager
+	public class GameManager
 	{
 		private static Player _player;
 		private static Location _startingLocation;
 		private static bool _gameStarted;
 
-		private static readonly List<Location> Locations = new List<Location>();
-		private static readonly List<Creature> Creatures = new List<Creature>();
-		private static readonly List<Item> Items = new List<Item>();  
-		private static readonly List<Objective> Objectives = new List<Objective>(); 
+		private readonly List<Location> _locations = new List<Location>();
+		private readonly List<Creature> _creatures = new List<Creature>();
+		private readonly List<Item> _items = new List<Item>();  
+		private readonly List<Objective> _objectives = new List<Objective>(); 
 
-		public static void Run()
+		public void Run()
 		{
 			Console.ForegroundColor = ConsoleColor.White;
 			while (_gameStarted == false)
@@ -26,7 +26,7 @@ namespace Blinker
 		}
 
 		//right now it's obsolete, gonna keep it though
-		private static void Play()
+		private void Play()
 		{
 			ClearConsole();
 			Console.ForegroundColor = ConsoleColor.White;
@@ -39,7 +39,7 @@ namespace Blinker
 			// ReSharper disable once FunctionNeverReturns
 		}
 
-		private static void StartNewGame()
+		private void StartNewGame()
 		{
 			ClearConsole();
 			Initialize();
@@ -47,12 +47,12 @@ namespace Blinker
 			_gameStarted = true;
 		}
 
-		private static void ClearConsole()
+		private void ClearConsole()
 		{
 			Console.Clear();
 		}
 
-		private static char ReadOption()
+		private char ReadOption()
 		{
 			Console.Write("KEY: ");
 			char option = Console.ReadKey().KeyChar;
@@ -61,7 +61,7 @@ namespace Blinker
 			return option;
 		}
 
-		private static void ShowMainMenu()
+		private void ShowMainMenu()
 		{
 			ClearConsole();
 			BreakLine();
@@ -73,12 +73,12 @@ namespace Blinker
 			ExecuteMainMenuAction();
 		}
 
-		private static void BreakLine()
+		private void BreakLine()
 		{
 			Console.WriteLine("-------------------------------------------------------------------");
 		}
 
-		private static void ShowError()
+		private void ShowError()
 		{
 			ShowActionMenu();
 			var colour = Console.ForegroundColor;
@@ -88,7 +88,7 @@ namespace Blinker
 			Console.WriteLine(" You pressed wrong key or typed not valid parameter.");
 		}
 
-		private static void ExecuteMainMenuAction()
+		private void ExecuteMainMenuAction()
 		{
 			var option = ReadOption();
 			switch (option)
@@ -107,7 +107,7 @@ namespace Blinker
 			}
 		}
 
-		private static void ShowActionMenu()
+		private void ShowActionMenu()
 		{
 			ClearConsole();
 			BreakLine();
@@ -123,7 +123,7 @@ namespace Blinker
 			BreakLine();
 		}
 
-		private static void ExecuteAction(char option)
+		private void ExecuteAction(char option)
 		{
 			//ShowActionMenu();
 			//var option = ReadOption();
@@ -137,7 +137,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("Where do you want to go?");
 					parameter = Console.ReadLine();
-					var location = Locations.Find(x => x.Name == parameter);
+					var location = _locations.Find(x => x.Name == parameter);
 					if (location != null)
 					{
 						ShowActionMenu();
@@ -152,7 +152,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("Who do you want to talk to?");
 					parameter = Console.ReadLine();
-					var npc = Creatures.Find(x => x.Name == parameter);
+					var npc = _creatures.Find(x => x.Name == parameter);
 					if (npc != null)
 					{
 						ShowActionMenu();
@@ -167,7 +167,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("Who do you want to attack?");
 					parameter = Console.ReadLine();
-					var creature = Creatures.Find(x => x.Name == parameter);
+					var creature = _creatures.Find(x => x.Name == parameter);
 					if (creature != null)
 					{
 						ShowActionMenu();
@@ -182,7 +182,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("What do you want to pick up?");
 					parameter = Console.ReadLine();
-					var pickedItem = Items.Find(x => x.Name == parameter);
+					var pickedItem = _items.Find(x => x.Name == parameter);
 					if (pickedItem != null)
 					{
 						ShowActionMenu();
@@ -197,7 +197,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("What do you want to drop?");
 					parameter = Console.ReadLine();
-					var droppedItem = Items.Find(x => x.Name == parameter);
+					var droppedItem = _items.Find(x => x.Name == parameter);
 					if (droppedItem != null)
 					{
 						ShowActionMenu();
@@ -212,7 +212,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("What do you want to equip?");
 					parameter = Console.ReadLine();
-					var equippedItem = Items.Find(x => x.Name == parameter);
+					var equippedItem = _items.Find(x => x.Name == parameter);
 					if (equippedItem != null)
 					{
 						ShowActionMenu();
@@ -227,7 +227,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("What do you want to unequip?");
 					parameter = Console.ReadLine();
-					var unequippedItem = Items.Find(x => x.Name == parameter);
+					var unequippedItem = _items.Find(x => x.Name == parameter);
 					if (unequippedItem != null)
 					{
 						ShowActionMenu();
@@ -262,7 +262,7 @@ namespace Blinker
 					BreakLine();
 					Console.WriteLine("What do you want to inspect?");
 					parameter = Console.ReadLine();
-					var selectedItem = Items.Find(x => x.Name == parameter);
+					var selectedItem = _items.Find(x => x.Name == parameter);
 					if (selectedItem != null)
 					{
 						ShowActionMenu();
@@ -282,7 +282,7 @@ namespace Blinker
 			}
 		}
 
-		private static void ShowHelp()
+		private void ShowHelp()
 		{
 			ClearConsole();
 			BreakLine();
@@ -304,7 +304,7 @@ namespace Blinker
 			Console.ReadKey();
 		}
 
-		private static void CreateNewPlayer()
+		private void CreateNewPlayer()
 		{
 			ClearConsole();
 			BreakLine();
@@ -313,11 +313,11 @@ namespace Blinker
 			var name = Console.ReadLine();
 			if (name == String.Empty)
 				name = "PLAYER";
-			_player = new Player(name, _startingLocation, Objectives);
+			_player = new Player(name, _startingLocation, _objectives);
 		}
 
 		//this might be used to load "story" from file in the future, right now it's a mess
-		private static void Initialize()
+		private void Initialize()
 		{
 			//## MANUAL ##
 			//PART I
@@ -442,7 +442,7 @@ namespace Blinker
 
 			// ## LISTS ##
 
-			Locations.AddMany(
+			_locations.AddMany(
 				northStreet,
 				junction,
 				southStreet,
@@ -459,7 +459,7 @@ namespace Blinker
 				houseAlcove
 				);
 
-			Creatures.AddMany(
+			_creatures.AddMany(
 				shopkeeper,
 				dave,
 				john,
@@ -470,19 +470,19 @@ namespace Blinker
 				groceryClient
 				);
 
-			Items.AddMany(
+			_items.AddMany(
 				item1, item2, item3, item4, item5, item6, item7, item8, item9, item10, item11,
 				item12, item13, item14, item15, item16, item17, item18, item19, item20, item21,
 				item22, item23, item24, item25, item26, item27
 				);
 
-			Objectives.AddMany(
+			_objectives.AddMany(
 				getKnife,
 				killCutthroat
 				);
 		}
 
-		private static void ConnectLocations(Location loc1, Location loc2)
+		private void ConnectLocations(Location loc1, Location loc2)
 		{
 			if (!loc1.Exits.Contains(loc2))
 				loc1.Exits.Add(loc2);

@@ -6,7 +6,9 @@ namespace Blinker
 	{
 		static void Main(string[] args)
 		{
-			GameManager.Run();
+			var gameManager = new GameManager();
+			gameManager.Run();
+
 			Console.ReadKey();
 		}
 	}
