@@ -61,6 +61,14 @@ namespace Blinker
 			return option;
 		}
 
+		private string ReadParameter()
+		{
+			string parameter = Console.ReadLine();
+			if (parameter != null)
+				return parameter.ToLower();
+			return null;
+		}
+
 		private void ShowMainMenu()
 		{
 			ClearConsole();
@@ -136,8 +144,8 @@ namespace Blinker
 					_player.CheckLocationExits();
 					BreakLine();
 					Console.WriteLine("Where do you want to go?");
-					parameter = Console.ReadLine();
-					var location = _locations.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var location = _locations.Find(x => x.Name.ToLower() == parameter);
 					if (location != null)
 					{
 						ShowActionMenu();
@@ -151,8 +159,8 @@ namespace Blinker
 					_player.CheckWhoIsThere();
 					BreakLine();
 					Console.WriteLine("Who do you want to talk to?");
-					parameter = Console.ReadLine();
-					var npc = _creatures.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var npc = _creatures.Find(x => x.Name.ToLower() == parameter);
 					if (npc != null)
 					{
 						ShowActionMenu();
@@ -166,8 +174,8 @@ namespace Blinker
 					_player.CheckWhoIsThere();
 					BreakLine();
 					Console.WriteLine("Who do you want to attack?");
-					parameter = Console.ReadLine();
-					var creature = _creatures.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var creature = _creatures.Find(x => x.Name.ToLower() == parameter);
 					if (creature != null)
 					{
 						ShowActionMenu();
@@ -181,8 +189,8 @@ namespace Blinker
 					_player.CheckPickupableItemsThere();
 					BreakLine();
 					Console.WriteLine("What do you want to pick up?");
-					parameter = Console.ReadLine();
-					var pickedItem = _items.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var pickedItem = _items.Find(x => x.Name.ToLower() == parameter);
 					if (pickedItem != null)
 					{
 						ShowActionMenu();
@@ -196,8 +204,8 @@ namespace Blinker
 					_player.CheckInventory();
 					BreakLine();
 					Console.WriteLine("What do you want to drop?");
-					parameter = Console.ReadLine();
-					var droppedItem = _items.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var droppedItem = _items.Find(x => x.Name.ToLower() == parameter);
 					if (droppedItem != null)
 					{
 						ShowActionMenu();
@@ -211,8 +219,8 @@ namespace Blinker
 					_player.CheckInventory();
 					BreakLine();
 					Console.WriteLine("What do you want to equip?");
-					parameter = Console.ReadLine();
-					var equippedItem = _items.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var equippedItem = _items.Find(x => x.Name.ToLower() == parameter);
 					if (equippedItem != null)
 					{
 						ShowActionMenu();
@@ -226,8 +234,8 @@ namespace Blinker
 					_player.CheckInventory();
 					BreakLine();
 					Console.WriteLine("What do you want to unequip?");
-					parameter = Console.ReadLine();
-					var unequippedItem = _items.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var unequippedItem = _items.Find(x => x.Name.ToLower() == parameter);
 					if (unequippedItem != null)
 					{
 						ShowActionMenu();
@@ -261,8 +269,8 @@ namespace Blinker
 					_player.CheckInventory();
 					BreakLine();
 					Console.WriteLine("What do you want to inspect?");
-					parameter = Console.ReadLine();
-					var selectedItem = _items.Find(x => x.Name == parameter);
+					parameter = ReadParameter();
+					var selectedItem = _items.Find(x => x.Name.ToLower() == parameter);
 					if (selectedItem != null)
 					{
 						ShowActionMenu();
